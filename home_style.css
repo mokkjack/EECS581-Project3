@@ -4,3 +4,66 @@
  * The CSS Styling Section for the Homepage
  * of Codesino.
  */
+
+h1 {
+    text-align: center;
+}
+
+#cat {
+    text-align: center;
+}
+
+#omega {
+    animation: rotate_omega 5s infinite linear;
+}
+
+@keyframes rotate_omega {
+    from { transform: rotate(0deg);}
+    to   { transform: rotate(360deg);}
+}
+
+/* Game Select Menu Buttons Styling */
+#game_select {
+    text-align: center;
+    padding: 30px;
+}
+
+li {
+    list-style-type: none;
+    padding: 5px;
+}
+
+#baccarat {
+    width: 950px;
+    height: 100px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 40px;
+}
+
+#blackjack {
+    width: 950px;
+    height: 100px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 40px;
+}
+
+#crash {
+    width: 950px;
+    height: 100px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 40px;
+}
+
+#picture_poker {
+    width: 950px;
+    height: 100px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 40px;
+}
+
+#ride_the_bus {
+    width: 950px;
+    height: 100px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 40px;
+}
