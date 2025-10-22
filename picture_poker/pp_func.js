@@ -42,3 +42,6 @@ class Stack {
         return this.elements.length;
     }
 }
+
+
+function start() {}

@@ -10,3 +10,8 @@ Note:   Added CSS & JS files for homepage
         Successful Back Button (so far)
         OmegaGamba
 ================
+
+= 10/22/25 =====
+User: Evan
+Time: 30min
+Note: Split picture poker into two halves
