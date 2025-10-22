@@ -4,3 +4,5 @@
  * The JavaScript Section for the Homepage
  * of Codesino.
  */
+
+//MIGHT NOT BE NEEDED // DELETE IF UNUSED

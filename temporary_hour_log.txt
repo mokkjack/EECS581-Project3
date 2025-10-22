@@ -1,0 +1,12 @@
+= 10/21/25 =====
+User: Evan
+Time: 4 hours
+Note:   Added CSS & JS files for homepage
+        Added HTML & CSS & JS files for picture poker
+        Added two directories: images / picture_poker
+        Styling for homepage
+        Stack Data Structure in JS
+        Code comments / half-baked prologue comments
+        Successful Back Button (so far)
+        OmegaGamba
+================
