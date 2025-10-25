@@ -1,0 +1,34 @@
+/* crashstyle.css */
+
+/* EECS 581: Group 21 Project 3
+ * The CSS Styling Section for crash
+ * in Codesino.
+ */
+
+ h1 {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+ }
+
+ #top {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+ }
+
+ #bottom {
+   position: fixed;
+   bottom: 50%;
+   left: 0;
+   width: 100%;
+ }
+
+ #back {
+   position: fixed;
+   bottom: 0;
+   right: 0;
+   height: 60px;
+   width: 260px;
+ }
