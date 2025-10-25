@@ -1,25 +1,50 @@
-<!-- blackjack.html -->
-
-<!-- EECS 581: Group 21 Project 3 -->
-<!-- -->
-<!-- -->
-
+<!--Blackjack.html-->
+<!--EECS Project 3-->
 <!doctype html>
-
 <html>
-    <head>
-        <!-- CSS Section -->
-        <link rel="stylesheet" type="text/css" href="Blackjack_style.css">
+  <head>
+    <meta charset="utf-8">
+    <title>CODE-SINO Blackjack</title>
+    <link rel="stylesheet" href="Blackjack_style.css">
+    <script src="Blackjackfunc.js" defer></script>
+  </head>
 
-        <title> CODE-SINO Blackjack </title>
-        <h1> blackjack </h1>
-        <script src="Blackjackfunc.js"></script>
-    </head>
+  <body>
+    <h1>Blackjack</h1>
 
-    <body>
-        <div id="bottom">
-            <p> </p>
-            <button id="back" onclick="document.location='../default.html'">Back</button>
-        </div>
-    </body>
+    <div id="table">
+      <div id="balance-area">
+        <!-- Display Player Balance(temp, since the balance should be global) -->
+        Balance: $<span id="balance">100</span>
+      </div>
+
+      <div id="bet-area">
+        <label for="bet">Enter Bet:</label>
+        <input type="number" id="bet" min="1" value="10">
+      </div>
+
+      <div id="dealer-area">
+        <h2>Dealer</h2>
+        <div id="dealer-cards" class="card-row"></div>
+        <div id="dealer-score"></div>
+      </div>
+
+      <div id="player-area">
+        <h2>Player</h2>
+        <div id="player-cards" class="card-row"></div>
+        <div id="player-score"></div>
+      </div>
+
+      <div id="controls">
+        <button id="dealBtn">Deal</button>
+        <button id="hitBtn" disabled>Hit</button>
+        <button id="standBtn" disabled>Stand</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div id="bottom">
+      <button id="back" onclick="document.location='../default.html'">Back</button>
+    </div>
+  </body>
 </html>
