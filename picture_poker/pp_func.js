@@ -5,7 +5,13 @@
  * of Codesino.
  */
 
-//6 RANKS ||| S > A > B > C > D > F
+//Definitions
+
+//Global Variables
+
+//Import & Export
+import { c } from "../home_func";
+export { CURRENCY_AMOUNT };
 
 //Stack Data Structure (Array Implementation) 
 //Used GeeksforGeeks for array implementation idea

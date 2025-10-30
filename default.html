@@ -14,9 +14,11 @@
         <h1> EECS 581: Group 21 Project 3 Code-sino Homepage </h1>     
     </head>
 
-    <body>
+    <body onload="currency()">
         <!-- Select Game List -->
         <!-- to my fellow coders, insert the path into the single quote -->
+         <button onclick="increase()"> Increase </button> <button onclick="decrease()"> Decrease </button>
+        <p id="currency"> </p>
         <div id="game_select">
             <li><button id="baccarat" onclick="document.location='baccarat/baccarat.html'"> Baccarat </button> </li>
             <li><button id="blackjack" onclick="document.location='blackjack/blackjack.html'"> Blackjack </button> </li>
