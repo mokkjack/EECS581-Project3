@@ -22,3 +22,14 @@ User: Evan
 Time: 2 hours
 Note:   Made cards for pp
         Experimenting with global currency (not working)
+================
+
+= 11/2/2025 =====
+User: Evan
+Time: 3 hours
+Note:   pp stack and shuffler completed
+        card class created
+        card display working
+        card removal working
+        need to readd cards to make 5 cards per hand
+=================

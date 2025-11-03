@@ -12,23 +12,51 @@
  }
 
  #top {
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
+   text-align: center;
  }
 
  #bottom {
-   position: fixed;
-   bottom: 50%;
-   left: 0;
-   width: 100%;
+   text-align: center;
  }
 
- #back {
-   position: fixed;
-   bottom: 0;
-   right: 0;
-   height: 60px;
-   width: 260px;
+ #user_bar {
+  text-align: center;
  }
+
+ #discard_button {
+  width: 500px;
+  height: 50px;
+ }
+
+/* Card Designs
+ * CSS Styling for All Rank Cards
+ * CSS Styling for Hidden Card
+ */
+.card {
+  width: 150px;
+  height: 200px;
+  background-size: cover;
+  border-radius: 10px;
+  border: 3px solid;
+  margin: 3px;
+  display: inline-block;
+  
+}
+
+/* Interactive Card Design */
+.user { cursor: pointer; }
+
+/* Selected Card Design*/
+.selected {border-color: red; transform: translateY(-10px);}
+
+/* Hidden Card Design */
+.hidden { background-image: url(../images/picture_poker_cards/card__back.png) !important;}
+
+ /* Rank Card Designs */
+#S_CARD { background-image: url(../images/picture_poker_cards/card_S_Rank.png); }
+#A_CARD { background-image: url(../images/picture_poker_cards/card_A_Rank.png); }
+#B_CARD { background-image: url(../images/picture_poker_cards/card_B_Rank.png); }
+#C_CARD { background-image: url(../images/picture_poker_cards/card_C_Rank.png); }
+#D_CARD { background-image: url(../images/picture_poker_cards/card_D_Rank.png); }
+#F_CARD { background-image: url(../images/picture_poker_cards/card_F_Rank.png); }
+

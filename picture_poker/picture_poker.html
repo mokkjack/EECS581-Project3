@@ -15,18 +15,15 @@
         <h1> Picture Poker </h1>
     </head>
 
-    <body>
-        <div id="top">
-            <p> top side </p>
-            <img src="../images/pp.jpg" height="500px" width="auto">
-            <p> POV: The judge is gonna rail me.</p>
+    <body onload="start()">
+        <div id="top"> </div>
+        <div id="bottom"> </div>
+        <div id="user_bar"> 
+            <button id="discard_button" onclick="discard()"> Discard </button>
         </div>
-        <div id="bottom">
-            <p> bot side </p>
-            <button id="back" onclick="document.location='../default.html'">Back</button>
-        </div>
-        <!-- STRUCTURE // SPLIT IN TWO HORIZONTALLY // USER STUFF ON BOTTOM // AI STUFF ON TOP //-->
-        
-        
     </body>
+
+    <!-- JavaScript Section -->
+    <script src="pp_func.js"></script>
+
 </html>
