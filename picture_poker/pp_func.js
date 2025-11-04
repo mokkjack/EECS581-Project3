@@ -10,6 +10,10 @@
 //Global Variables
 const THIS_HAND = document.getElementById('bottom');
 const OTHER_HAND = document.getElementById('top');
+let THIS_HAND_COUNT = 0;
+let OTHER_HAND_COUNT = 0;
+let PLAYING = false;
+let NEXT_PHASE = false;
 const ranks = ['S_CARD', 'A_CARD', 'B_CARD', 'C_CARD', 'D_CARD', 'F_CARD'];
 
 //Import & Export (WORK IN PROGRESS)
@@ -53,6 +57,7 @@ class Stack {
             let other = random_number_generator();
             [this.elements[i], this.elements[other]] = [this.elements[other], this.elements[i]];
         }
+        return;
     }
 }
 
@@ -75,13 +80,16 @@ class Card {
     select() { //Select Method
         this.object.classList.add("selected");
         this.selected = true;
+        return;
     }
     deselect() { //Deselect Method
         this.object.classList.remove("selected");
         this.selected = false;
+        return;
     }
     select_toggle() { //Switch Select Method
         this.selected ? this.deselect() : this.select();
+        return;
     }
     display(container_name) { //Display Method
         //HTML Object Manipulation
@@ -94,7 +102,7 @@ class Card {
             this.object.classList.add("hidden"); 
             container_name.appendChild(this.object);
         }
-        
+        return;
     }
 }
 
@@ -104,10 +112,29 @@ function random_number_generator() {
     return rng_value;
 }
 
+//Draw Cards Function
+function draw_cards(deck, container_name) {
+    if (container_name == THIS_HAND) {
+        for (THIS_HAND_COUNT; THIS_HAND_COUNT < 5; THIS_HAND_COUNT++) {
+            deck.pop().display(container_name);
+        }
+
+    } else {
+        for (OTHER_HAND_COUNT; OTHER_HAND_COUNT < 5; OTHER_HAND_COUNT++) {
+            deck.pop().display(container_name);
+        }
+    }
+    return;
+}
+
 //Discard Card Function
 function discard() {
     let selected_cards = document.querySelectorAll(".selected");
-    selected_cards.forEach(card => {card.remove();})
+    selected_cards.forEach(card => {
+        card.remove();
+        THIS_HAND_COUNT--;
+    })
+    return;
 }
 
 //Load Card Function
@@ -125,12 +152,34 @@ function load_cards() {
     return card_stack;
 }
 
+/* THIS TURN
+ * BET => DISCARD
+ * DRAW
+ * OTHER TURN
+ * OTHER DISCARD
+ * COMPARE
+ */
+
+function switch_turn(deck, turn) {
+    turn ? turn = false : turn = true;
+    return turn;
+}
+
+function other_turn(deck) {
+
+}
+
+function this_turn(deck) {
+
+}
+
 //Start Function
 function start() {
     let deck = load_cards();
-    for (let i = 0; i < 5; i++) {
-        deck.pop().display(THIS_HAND);
-        deck.pop().display(OTHER_HAND);
-    }        
+    draw_cards(deck, THIS_HAND);
+    draw_cards(deck, OTHER_HAND);
+
+    this_turn(deck);
+
 }
     
