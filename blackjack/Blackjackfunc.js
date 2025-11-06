@@ -185,8 +185,13 @@ function endRound(result){
   dealerHiddenCard = false;
   updateDisplay();
   if (result === "win") {
+    if (getScore(playerHand) === 21 && playerHand.length === 2){
+      GoonCoin += bet * 2.5;
+      showMessage("Blackjack! You win!");
+    }else{
     GoonCoin += bet * 2;
     showMessage("You win!");
+    }
   } else if (result === "lose") {
     showMessage("You lose!");
   } else {
