@@ -11,7 +11,10 @@
   <body style="background-color: rgb(40, 132, 60);">
         <h1 class="title">baccarat </h1>
 
-        <div id="table">
+        <div id="table"></div>
+          <div id="balance-area">
+            Balance: $<span id="balance">0</span>
+          </div>
 
           <div id="playerCards">
             <h2>Player</h2>
@@ -26,20 +29,23 @@
           </div>
 
           <div id="playerBet">
-            <label for="bet">Banker<br>Payout: 0.95|1</label>
-            <input type="number" id="bet" min="1" value="0">
+            <label for="bet">Banker<br>Payout: 1|1</label>
+            <input type="number" id="playerBet" min="1" value="0">
           </div>
 
           <div id="tieBet">
             <label for="bet">Tie<br>Payout: 8|1</label>
-            <input type="number" id="bet" min="1" value="0">
+            <input type="number" id="tieBet" min="1" value="0">
           </div>
 
           <div id="bankerBet">
             <label for="bet">Player<br>Payout: 1|1</label>
-            <input type="number" id="bet" min="1" value="0">
+            <input type="number" id="bankerBet" min="1" value="0">
           </div>
 
+        </div>
+        <div id="bottom">
+          <button id="back" onclick="goBack()">Back</button>
         </div>
   </body>
 </html>
