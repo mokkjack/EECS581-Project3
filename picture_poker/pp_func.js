@@ -16,10 +16,6 @@ let PLAYING = false;
 let NEXT_PHASE = false;
 const ranks = ['S_CARD', 'A_CARD', 'B_CARD', 'C_CARD', 'D_CARD', 'F_CARD'];
 
-//Import & Export (WORK IN PROGRESS)
-// import { c } from "../home_func";
-// export { CURRENCY_AMOUNT };
-
 //Stack Data Structure (Array Implementation) 
 //Used GeeksforGeeks for array implementation idea
 class Stack {

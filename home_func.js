@@ -5,34 +5,11 @@
  * of Codesino.
  */
 
-//Definitions
-const CURRENCY_SPOT = document.getElementById("currency");
+//Global Currency Storage
+let GoonCoin = 10;
 
-//Global Variables
-let CURRENCY_AMOUNT = 0;
-let FIRST_LOGIN = true;
-
-//Import & Export
-export const c = CURRENCY_AMOUNT; 
+/* Guys, just add another script to html file
+Definitely overthought this one lmao */
 
 
-//Functions
-function currency() {
-    if (FIRST_LOGIN) {
-        CURRENCY_AMOUNT = 500;
-        FIRST_LOGIN = false;
-    }
-    CURRENCY_SPOT.innerHTML = CURRENCY_AMOUNT;
-}
 
-function decrease() {
-    CURRENCY_AMOUNT = CURRENCY_AMOUNT - 100;
-    currency();
-    return;
-}
-
-function increase() {
-    CURRENCY_AMOUNT = CURRENCY_AMOUNT + 100;
-    currency();
-    return;
-}
