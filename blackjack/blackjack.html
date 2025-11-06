@@ -1,11 +1,11 @@
-<!--Blackjack.html-->
-<!--EECS Project 3-->
+<!-- blackjack.html -->
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>CODE-SINO Blackjack</title>
     <link rel="stylesheet" href="Blackjack_style.css">
+    <script src="../home_func.js" defer></script>
     <script src="Blackjackfunc.js" defer></script>
   </head>
 
@@ -13,15 +13,17 @@
     <h1>Blackjack</h1>
 
     <div id="table">
+
       <div id="balance-area">
-        <!-- Display Player Balance(temp, since the balance should be global) -->
-        Balance: $<span id="balance"></span>
+        Balance: $<span id="balance">0</span>
       </div>
+
 
       <div id="bet-area">
         <label for="bet">Enter Bet:</label>
         <input type="number" id="bet" min="1" value="10">
       </div>
+
 
       <div id="dealer-area">
         <h2>Dealer</h2>
@@ -41,8 +43,9 @@
         <button id="standBtn" disabled>Stand</button>
         <button id="resetBtn">Reset</button>
       </div>
-    </div>
 
+      <div id="message-area"></div>
+    </div>
     <div id="bottom">
       <button id="back" onclick="document.location='../default.html'">Back</button>
     </div>
