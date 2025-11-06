@@ -1,16 +1,45 @@
-//home_func.js
+var bailouttime = 0;
 
-/* EECS 581: Group 21 Project 3
- * The JavaScript Section for the Homepage
- * of Codesino.
- */
+// Global GoonCoin
+var GoonCoin = sessionStorage.getItem("GoonCoin");
+if (GoonCoin === null) {
+    GoonCoin = 1000;
+    sessionStorage.setItem("GoonCoin", GoonCoin);
+} else {
+    GoonCoin = parseInt(GoonCoin);
+}
 
-//Global Currency Storage
-var GoonCoin = 10;
+// Save GoonCoin to sessionStorage
+function saveGoonCoin() {
+    sessionStorage.setItem("GoonCoin", GoonCoin);
+}
 
-/* Guys, just add another script to html file
-Definitely overthought this one lmao */
-//Bro, why you declared global currency as a local variable?
+// Bailout function
+function bailout() {
+    if (GoonCoin === 0) {
+        GoonCoin += 1000;
+        bailouttime += 1;
+        saveGoonCoin();
+        updateCurrencyDisplay();
+    }
+}
 
+// Update homepage currency display
+function updateCurrencyDisplay() {
+    const currencyElement = document.getElementById("currency");
+    if (currencyElement) {
+        let stored = sessionStorage.getItem("GoonCoin");
+        GoonCoin = stored !== null ? parseInt(stored) : 1000;
+        currencyElement.textContent = GoonCoin;
+    }
+}
 
+// Called on initial load
+window.addEventListener("load", () => {
+    updateCurrencyDisplay();
+});
 
+// Also update when page is shown from bfcache (back button)
+window.addEventListener("pageshow", () => {
+    updateCurrencyDisplay();
+});

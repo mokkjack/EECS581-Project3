@@ -1,10 +1,8 @@
 //Black jack game logic(work in progress)
-
-//Golabal currency
+//Global currency
 document.addEventListener("DOMContentLoaded", () => {
   let balanceDisplay = document.getElementById("balance");
   balanceDisplay.textContent = GoonCoin;
-
   // assign buttons after DOM is ready and attach listeners
   dealBtn = document.getElementById("dealBtn");
   hitBtn = document.getElementById("hitBtn");
@@ -24,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function updateBalance() {
   document.getElementById("balance").textContent = GoonCoin;
+  saveGoonCoin();
 }
 //Card suit and value arrays
 const suit = ["H","C","D","S"];
@@ -76,6 +75,10 @@ function startGame(){
   dealBtn.disabled = true;
   hitBtn.disabled = false;
   standBtn.disabled = false;
+  resetBtn.disabled = true;
+  if (getScore(playerHand) === 21){
+    stand();
+  }
 }
 //function to handle player hitting
 function hit(){
@@ -83,6 +86,8 @@ function hit(){
   updateDisplay();
   if (getScore(playerHand) > 21){
     endRound("lose");
+  }else if (getScore(playerHand) === 21){
+    stand();
   }
 }
 //function to handle player standing
@@ -117,6 +122,7 @@ function resetGame(){
   dealBtn.disabled = false;
   hitBtn.disabled = true;
   standBtn.disabled = true;
+  resetBtn.disabled = false;
 }
 
 //Function to update the display of cards
@@ -157,7 +163,7 @@ function updateDisplay(){
     document.getElementById("dealer-score").textContent = "Score: " + getScore(dealerHand);
   }
 }
-
+//Function to calculate the score of a hand
 function getScore(hand){
   let score = 0;
   let ace = 0;
@@ -174,8 +180,10 @@ function getScore(hand){
   }
   return score;
 }
-
+//Function to handle end of round
 function endRound(result){
+  dealerHiddenCard = false;
+  updateDisplay();
   if (result === "win") {
     GoonCoin += bet * 2;
     showMessage("You win!");
@@ -185,4 +193,23 @@ function endRound(result){
     GoonCoin += bet;
     showMessage("Push!");
   }
+  updateBalance();
+  dealBtn.disabled = true;
+  hitBtn.disabled = true;
+  standBtn.disabled = true;
+  resetBtn.disabled = false;
+}
+//Function to show messages to the player
+function showMessage(msg){
+  document.getElementById("message-area").textContent = msg;
+}
+//Function to clear messages
+function clearMessage(){
+  document.getElementById("message-area").textContent = "";
+}
+//Function to navigate back to homepage
+function goBack() {
+    sessionStorage.setItem("GoonCoin", GoonCoin);
+    // Navigate and force reload so homepage reads the latest GoonCoin
+    window.location.href = "../default.html";
 }
