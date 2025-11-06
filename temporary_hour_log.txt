@@ -33,3 +33,12 @@ Note:   pp stack and shuffler completed
         card removal working
         need to readd cards to make 5 cards per hand
 =================
+= 11/6/2025 =====
+User: Zhang
+Time: 5 hours
+Note:   blackjack logic done
+        redesigned blackjack.html
+        refactor home_func.js for global currency compability
+        refactor default.html for changes in home_func.js
+        some minor bug fixing
+=================
