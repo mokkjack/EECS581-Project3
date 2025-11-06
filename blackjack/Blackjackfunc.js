@@ -93,7 +93,7 @@ function hit(){
 //function to handle player standing
 function stand(){
   dealerHiddenCard = false;
-  while (getScore(dealerHand) < 17 || getScore(playerHand) > getScore(dealerHand)){
+  while (getScore(dealerHand) < 17){
     dealerHand.push(deck.pop());
   }
   updateDisplay();
