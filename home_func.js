@@ -6,10 +6,11 @@
  */
 
 //Global Currency Storage
-let GoonCoin = 10;
+var GoonCoin = 10;
 
 /* Guys, just add another script to html file
 Definitely overthought this one lmao */
+//Bro, why you declared global currency as a local variable?
 
 
 
