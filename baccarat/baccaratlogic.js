@@ -55,7 +55,7 @@ class Shoe {
 }
 
 class BaccaratGame {
-    bet = parseInt(document.getElementById("bet").value);
+    bet = parseInt(document.getElementById("playerBet").value);
     if (isNaN(bet) || bet <= 0 || bet > GoonCoin) {
         alert("Invalid bet amount!");
         return;
