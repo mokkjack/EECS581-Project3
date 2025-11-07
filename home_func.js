@@ -9,7 +9,7 @@ Output: Show user's global currency in the main menu, and reflect the changed io
 */
 
 //a global variable for bailout time
-var bailouttime = 0;
+var bailouttime = parseInt(sessionStorage.getItem("bailouttime")) || 0;
 
 // Global GoonCoin
 var GoonCoin = sessionStorage.getItem("GoonCoin");
@@ -27,12 +27,18 @@ function saveGoonCoin() {
     sessionStorage.setItem("GoonCoin", GoonCoin);
 }
 
+// Save bailouttime to sessionStorage
+function saveBailoutTime() {
+    sessionStorage.setItem("bailouttime", bailouttime);
+}
+
 // Bailout function
 function bailout() {
     if (GoonCoin === 0) {
         GoonCoin += 1000;
         bailouttime += 1;
         saveGoonCoin();
+        saveBailoutTime();
         updateCurrencyDisplay();
     }
 }
@@ -49,6 +55,12 @@ function updateCurrencyDisplay() {
         GoonCoin = stored !== null ? parseInt(stored) : 1000;
         //updated the currency element in defualt.html
         currencyElement.textContent = GoonCoin;
+    }
+    const bailoutCountElement = document.getElementById("bailout-count");
+    if (bailoutCountElement) {
+        let storedBailout = sessionStorage.getItem("bailouttime");
+        bailouttime = storedBailout !== null ? parseInt(storedBailout) : 0;
+        bailoutCountElement.textContent = bailouttime;
     }
 }
 
