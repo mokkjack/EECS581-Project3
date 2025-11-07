@@ -8,11 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
   hitBtn = document.getElementById("hitBtn");
   standBtn = document.getElementById("standBtn");
   resetBtn = document.getElementById("resetBtn");
+  doubleBtn = document.getElementById("double");
 
   dealBtn.addEventListener("click", startGame);
   hitBtn.addEventListener("click", hit);
   standBtn.addEventListener("click", stand);
   resetBtn.addEventListener("click", resetGame);
+  doubleBtn.addEventListener("click", doubleDown);
 
   // initial states
   dealBtn.disabled = false;
@@ -75,6 +77,7 @@ function startGame(){
   dealBtn.disabled = true;
   hitBtn.disabled = false;
   standBtn.disabled = false;
+  doubleBtn.disabled = false;
   resetBtn.disabled = true;
   if (getScore(playerHand) === 21){
     stand();
@@ -89,6 +92,7 @@ function hit(){
   }else if (getScore(playerHand) === 21){
     stand();
   }
+  doubleBtn.disabled = true;
 }
 //function to handle player standing
 function stand(){
@@ -109,6 +113,23 @@ function stand(){
     endRound("push");
   }
 }
+function doubleDown(){
+  if (GoonCoin < bet) {
+    alert("Not enough GoonCoin to double down!");
+    doubleDown.disabled = true;
+    return;
+  }
+  GoonCoin -= bet;
+  bet *= 2;
+  updateBalance();
+  playerHand.push(deck.pop());
+  updateDisplay();
+  if (getScore(playerHand) > 21){
+    endRound("lose");
+  } else {
+    stand();
+  }
+}
 //function to reset the game
 function resetGame(){
   playerHand = [];
@@ -122,6 +143,7 @@ function resetGame(){
   dealBtn.disabled = false;
   hitBtn.disabled = true;
   standBtn.disabled = true;
+  doubleBtn.disabled = true;
   resetBtn.disabled = false;
 }
 
@@ -202,6 +224,7 @@ function endRound(result){
   dealBtn.disabled = true;
   hitBtn.disabled = true;
   standBtn.disabled = true;
+  doubleBtn.disabled = true;
   resetBtn.disabled = false;
 }
 //Function to show messages to the player
