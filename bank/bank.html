@@ -1,0 +1,30 @@
+<!-- bank.html -->
+
+<!-- EECS 581: Group 21 Project 3               -->
+<!-- The HTML Website Section for the Homepage  -->
+<!-- of Codesino.                               -->
+
+<!doctype html>
+ <html>
+    <head>
+        <!-- CSS Section -->
+        <link rel="stylesheet" type="text/css" href="home_style.css">
+        
+        <title> CODE-SINO BANK STORE </title>    
+    </head>
+    <body onload="updateCurrencyDisplay()">
+        <h1> BANK STORE </h1> 
+        <p id="currency"> </p>
+        <h2> YOU HAVE BEEN BAILED OUT <span id="bailout-count">0</span> TIMES</h2>
+
+        <div id="BankOptions">
+            <li><button id="bailout" onclick="bailout()"> Bail me out!</button> </li>
+        </div>
+        <div id="bottom">
+            <button id="back" onclick="document.location='../default.html'">Back</button>
+        </div>
+    <!-- JavaScript Section -->
+    <script src="../home_func.js"></script>
+    <script src="bank.js"></script>
+
+ </html>
