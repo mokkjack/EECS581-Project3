@@ -89,11 +89,56 @@ class Betting {
 
     }
     
-    clearBet(){
+    //clearBet(){}
 
+    //doubleBet(){}
+}
+
+function updateDisplay(){
+  //get the html element id of player card and dealer card section
+  const playerCardsDiv = document.getElementById("player-cards");
+  const dealerCardsDiv = document.getElementById("dealer-cards");
+  //get the inner html element of player and dealer card section
+  playerCardsDiv.innerHTML = "";
+  dealerCardsDiv.innerHTML = "";
+
+  const suitMap = {
+    'Hearts': 'Hearts',
+    'Spades': 'Spades',
+    'Diamonds': 'Diamonds',
+    'Clubs': 'Clubs'
+  };
+  for (let card of playerHand){
+    const img = document.createElement("img");
+    img.src = `../images/Cards/card${suitMap[card.suit]}${card.value}.png`;
+    img.classList.add("card");
+    playerCardsDiv.appendChild(img);
+  }
+  dealerHand.forEach((card, index) => {
+  const img = document.createElement("img");
+    img.classList.add("card");
+    dealerCardsDiv.appendChild(img);
+  });
+  document.getElementById("player-score").textContent = "Score: " + getScore(playerHand);
+  if (dealerHiddenCard) {
+    document.getElementById("dealer-score").textContent = "Score: ?";
+  } else {
+    document.getElementById("dealer-score").textContent = "Score: " + getScore(dealerHand);
+  }
+}
+
+function getScore(hand){
+    let score = 0; 
+    for (let card of hand) {
+        if (["Jack", "Queen", "King"].includes(card.value)) score += 10;
+        elif ("Ace".includes(card.value)){
+            score += 1;
+        }else score += parseInt(card.value);
     }
+    return score % 10;
+}
 
-    doubleBet(){
-
-    }
+function goBack() {
+    sessionStorage.setItem("GoonCoin", GoonCoin);
+    window.location.href = "../default.html";
 }
