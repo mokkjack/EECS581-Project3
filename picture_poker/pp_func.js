@@ -140,10 +140,10 @@ function load_cards() {
 }
 
 /***********************
- *
+ * Hands
  *
  * 
- */
+ ************************/
 
 //Clear Function
 function clear(container_name) {
@@ -156,10 +156,8 @@ function clear(container_name) {
 
 //Value Function
 function find_value_of_card(card) {
-    for (let i = 0; i < ranks.size; i++) {
-        if (ranks[i] === card.rank) return i;
-    }
-    return -1;
+    const rank = card.getAttribute('id');
+    return ranks.indexOf(rank);
 }
 
 //Tally Score Function
@@ -199,9 +197,11 @@ function sort(container_name) {
         }
         if (!(swap)) break; //Early Termination
     }
+
+    //Clear & Place Sorted Hand
     clear(container_name);
     for (let k = 0; k < 5; k++) {
-        console.log(card_array[k]);
+        card_array.forEach(card => container_name.appendChild(card));
     }
 
 }
@@ -209,7 +209,9 @@ function sort(container_name) {
 //Dealer Function
 function dealer_plays() {
     /* Smart Selection Function here*/
+    sort(OTHER_HAND);
     unhide_cards();
+    
     
 }
 
