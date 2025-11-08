@@ -14,6 +14,7 @@ let THIS_HAND_COUNT = 0;
 let OTHER_HAND_COUNT = 0;
 let PLAYING = false;
 let NEXT_PHASE = false;
+var deck;
 const ranks = ['S_CARD', 'A_CARD', 'B_CARD', 'C_CARD', 'D_CARD', 'F_CARD'];
 
 //Stack Data Structure (Array Implementation) 
@@ -123,16 +124,6 @@ function draw_cards(deck, container_name) {
     return;
 }
 
-//Discard Card Function
-function discard() {
-    let selected_cards = document.querySelectorAll(".selected");
-    selected_cards.forEach(card => {
-        card.remove();
-        THIS_HAND_COUNT--;
-    })
-    return;
-}
-
 //Load Card Function
 function load_cards() {
     //Create a Card Stack
@@ -148,34 +139,104 @@ function load_cards() {
     return card_stack;
 }
 
-/* THIS TURN
- * BET => DISCARD
- * DRAW
- * OTHER TURN
- * OTHER DISCARD
- * COMPARE
+/***********************
+ *
+ *
+ * 
  */
 
-function switch_turn(deck, turn) {
-    turn ? turn = false : turn = true;
-    return turn;
+//Clear Function
+function clear(container_name) {
+    let cards = container_name.querySelectorAll('*');
+    cards.forEach(card => {
+        card.remove();
+    })
+    return;
 }
 
-function other_turn(deck) {
+//Value Function
+function find_value_of_card(card) {
+    for (let i = 0; i < ranks.size; i++) {
+        if (ranks[i] === card.rank) return i;
+    }
+    return -1;
+}
+
+//Tally Score Function
+function tally_score() {
 
 }
 
-function this_turn(deck) {
+//Unhide Function
+function unhide_cards() {
+    let hidden_cards = document.querySelectorAll(".hidden");
+    hidden_cards.forEach(card => {
+        card.classList.remove("hidden");
+    })
+    return;
+}
 
+//Sort Function (Bubble Sort)
+function sort(container_name) {
+    let card_array = []; //Card Array
+
+    //Pushing Cards into the Array
+    let cards = container_name.querySelectorAll('*');
+    cards.forEach(card => {
+        card_array.push(card);
+    })
+
+    //Bubble Sort
+    for (let i = 0; i < 4; i++) {
+        swap = false;
+        for (let j = 0; j < 4 - i; j++) {
+            let comparable1 = find_value_of_card(card_array[j]);
+            let comparable2 = find_value_of_card(card_array[j+1]);
+            if (comparable1 > comparable2) {
+                [card_array[j], card_array[j+1]] = [card_array[j+1], card_array[j]]; //Swap
+                swap = true;
+            }
+        }
+        if (!(swap)) break; //Early Termination
+    }
+    clear(container_name);
+    for (let k = 0; k < 5; k++) {
+        console.log(card_array[k]);
+    }
+
+}
+
+//Dealer Function
+function dealer_plays() {
+    /* Smart Selection Function here*/
+    unhide_cards();
+    
+}
+
+
+//Discard Card Function
+function discard() {
+    let selected_cards = document.querySelectorAll(".selected");
+    selected_cards.forEach(card => {
+        card.remove();
+        THIS_HAND_COUNT--;
+    })
+    draw_cards(deck, THIS_HAND);
+    sort(THIS_HAND);
+    dealer_plays();
+    return;
+}
+
+//Distribute Cards Function
+function distribute() {
+    draw_cards(deck, THIS_HAND);
+    draw_cards(deck, OTHER_HAND);
+    return;
 }
 
 //Start Function
 function start() {
-    let deck = load_cards();
-    draw_cards(deck, THIS_HAND);
-    draw_cards(deck, OTHER_HAND);
-
-    this_turn(deck);
-
+    deck = load_cards();
+    distribute();
 }
     

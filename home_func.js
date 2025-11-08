@@ -1,7 +1,7 @@
 /*Prologue comment:
 File Name: home_func
 EECS 581 Project 3
-Author: Zhang Chen, Evan Zhuo
+Author: Zhang Chen
 Purpose: This file provide the logic for a global currency named GoonCoin and bailouttime(temp)
 This file mainly provide the logic for a global currency and bailout function that will bre presistent across multiple game
 Input: None
