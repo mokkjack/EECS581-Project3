@@ -5,7 +5,7 @@
  */
 const decks = 5 
 const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
-const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
+const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
 //game vars
 let playerHand = [];
@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let playBtn = document.getElementById("playBtn");
   playBtn.addEventListener("click", startGame);
+
+  let backBtn = document.getElementById("backBtn");
+  backBtn.addEventListener("click", goBack);
 });
 
 class Shoe {
@@ -73,9 +76,9 @@ class BaccaratGame {
     static score(hand) {
         let score = 0;
         for (let card of hand) {
-            if (["Jack", "Queen", "King", "10"].includes(card.value)) {
+            if (["J", "Q", "K", "10"].includes(card.value)) {
                 score += 0;
-            } else if ("Ace" === card.value) {
+            } else if ("A" === card.value) {
                 score += 1;
             } else {
                 score += parseInt(card.value);
@@ -127,7 +130,7 @@ class BaccaratGame {
             return null;
         }
 
-        GoonCoin -= totalBet;
+        GoonCoin -= totalBet; //remove bet from total
         updateBalance();
         
         this.playerHand = [this.shoe.deal(), this.shoe.deal()];
@@ -144,8 +147,8 @@ class BaccaratGame {
         }
         
         const playerThirdCardValue = playerThirdCard ? 
-            (["Jack", "Queen", "King", "10"].includes(playerThirdCard.value) ? 0 : 
-             "Ace" === playerThirdCard.value ? 1 : parseInt(playerThirdCard.value)) : -1;
+            (["J", "Q", "K", "10"].includes(playerThirdCard.value) ? 0 : 
+             "A" === playerThirdCard.value ? 1 : parseInt(playerThirdCard.value)) : -1;
         
         if (BaccaratGame.needsThirdCard(this.bankerHand, bankerScore, false, playerThirdCardValue)) {
             this.bankerHand.push(this.shoe.deal());
@@ -154,45 +157,40 @@ class BaccaratGame {
         
         const winner = this.determineWinner();
         
+        //winning vars
         let totalWinnings = 0;
         let winMessage = "";
         
         if (winner === 'tie') {
-
+            //push for player/banker on tie
             totalWinnings += playerBetAmount; 
             totalWinnings += bankerBetAmount; 
             if (tieBetAmount > 0) {
-                totalWinnings += tieBetAmount * 9;
-                winMessage += `Tie bet: +${tieBetAmount * 9} GoonCoins\n`;
+                totalWinnings += tieBetAmount * 9; //tie payout
             }
-            winMessage += `Player & Banker bets returned\n`;
         } else {
+            //playerwin
+            if (playerBetAmount > 0) {
+                if (winner === 'player') {
+                    totalWinnings += playerBetAmount * 2;
+                }
+            }
+            //bankerwin
+            if (bankerBetAmount > 0) {
+                if (winner === 'banker') {
+                    totalWinnings += bankerBetAmount * 2;
+                }
+            }
 
-            if (playerBetAmount > 0 && winner === 'player') {
-                totalWinnings += playerBetAmount * 2;
-                winMessage += `Player bet: +${playerBetAmount * 2} GoonCoins\n`;
-            } else {
-                totalWinnings += playerBetAmount;
-            }
-            
-            if (bankerBetAmount > 0 && winner === 'banker') {
-                totalWinnings += Math.floor(bankerBetAmount * 2);
-                winMessage += `Banker bet: +${Math.floor(bankerBetAmount * 2)} GoonCoins\n`;
-            } else {
-                totalWinnings += bankerBetAmount;
-            }
-            
-            if (tieBetAmount > 0) {
-                winMessage += `Tie bet: Lost\n`;
-            }
         }
         
+        //add winnings to total
         if (totalWinnings > 0) {
             GoonCoin += totalWinnings;
             updateBalance();
         }
-        
-        const resultMessage = `Winner: ${winner.toUpperCase()}!\n${winMessage}Your balance: ${GoonCoin} GoonCoins`;
+        //win message
+        const resultMessage = `Winner: ${winner.toUpperCase()}! Your balance: ${GoonCoin} GoonCoins`;
         this.showResult(resultMessage, winner);
         
         return winner;
@@ -280,8 +278,8 @@ function startGame(){
 function getScore(hand){
     let score = 0; 
     for (let card of hand) {
-        if (["Jack", "Queen", "King"].includes(card.value)) score += 10;
-        else if ("Ace".includes(card.value)){
+        if (["J", "Q", "K"].includes(card.value)) score += 10;
+        else if ("A".includes(card.value)){
             score += 1;
         }else{ 
             score += parseInt(card.value);
@@ -290,7 +288,9 @@ function getScore(hand){
     return score % 10;
 }
 
+//Function to navigate back to homepage
 function goBack() {
     sessionStorage.setItem("GoonCoin", GoonCoin);
+    // Navigate and force reload so homepage reads the latest GoonCoin
     window.location.href = "../default.html";
 }
