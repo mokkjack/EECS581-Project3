@@ -11,14 +11,16 @@ const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', '
 //game vars
 let playerHand = [];
 let bankerHand = [];
-letcurrentBet = 0;
+let currentBet = 0;
 let betType = '';
+let game
 
 document.addEventListener("DOMContentLoaded", () => {
   let balanceDisplay = document.getElementById("balance");
   balanceDisplay.textContent = GoonCoin;
-  playBtn.addEventListener("click", BaccaratGameGame);
-  playBtn.disabled = true;
+
+  let playBtn = document.getElementById("playBtn");
+  playBtn.addEventListener("click", startGame);
 });
 
 function updateBalance() {
@@ -62,7 +64,7 @@ class Shoe {
 
 class BaccaratGame {
     constructor() {
-        this.Shoe = new Shoe();
+        this.shoe = new Shoe();
         this.playerHand = [];
         this.bankerHand = [];
         this.betAmount = 0;
@@ -78,25 +80,25 @@ class BaccaratGame {
                 score += 1;
             } else {
                 score += parseInt(card.value);
+            }
         }
-    }
-    return score % 10;
+        return score % 10;
     }
 
   
     static needsThirdCard(hand, score, isPlayer, bankerThirdCardValue) {
         if (hand.length === 2) {
-        if (isPlayer) {
-            // Player draws third card if score is 0-5
-            return score <= 5;
-        } else {
-            // Banker drawing rules are more complex
-            if (score <= 2) return true;
-            if (score === 3 && bankerThirdCardValue !== 8) return true;
-            if (score === 4 && bankerThirdCardValue >= 2 && bankerThirdCardValue <= 7) return true;
-            if (score === 5 && bankerThirdCardValue >= 4 && bankerThirdCardValue <= 7) return true;
-            if (score === 6 && bankerThirdCardValue >= 6 && bankerThirdCardValue <= 7) return true;
-        }
+            if (isPlayer) {
+                // Player draws third card if score is 0-5
+                return score <= 5;
+            } else {
+                // Banker drawing rules are more complex
+                if (score <= 2) return true;
+                if (score === 3 && bankerThirdCardValue !== 8) return true;
+                if (score === 4 && bankerThirdCardValue >= 2 && bankerThirdCardValue <= 7) return true;
+                if (score === 5 && bankerThirdCardValue >= 4 && bankerThirdCardValue <= 7) return true;
+                if (score === 6 && bankerThirdCardValue >= 6 && bankerThirdCardValue <= 7) return true;
+            }
         }
         return false;
     }
@@ -109,18 +111,32 @@ class BaccaratGame {
         if (bankerScore > playerScore) return 'banker';
         return 'tie';
     } 
-    playGame(betAmount, betType) {
-        this.betAmount = betAmount;
-        this.betType = betType;
+    playGame() {
+        //get inputs
+        const playerBetAmount = parseInt(document.getElementById("playerBet").value) || 0;
+        const bankerBetAmount = parseInt(document.getElementById("bankerBet").value) || 0;
+        const tieBetAmount = parseInt(document.getElementById("tieBet").value) || 0;
         
-        // Deal initial cards
+        const totalBet = playerBetAmount + bankerBetAmount + tieBetAmount;
+        
+        if (totalBet <= 0 || totalBet > GoonCoin) {
+            alert("Invalid bet amount!");
+            return null;
+        }
+        
+        //bets
+        if (playerBetAmount > 0) Betting.placeBet('player', playerBetAmount);
+        if (bankerBetAmount > 0) Betting.placeBet('banker', bankerBetAmount);
+        if (tieBetAmount > 0) Betting.placeBet('tie', tieBetAmount);
+
+        //deal 2
         this.playerHand = [this.shoe.deal(), this.shoe.deal()];
         this.bankerHand = [this.shoe.deal(), this.shoe.deal()];
         
         let playerScore = BaccaratGame.score(this.playerHand);
         let bankerScore = BaccaratGame.score(this.bankerHand);
         
-        // Check if player needs third card
+        //3rd check player
         let playerThirdCard = null;
         if (BaccaratGame.needsThirdCard(this.playerHand, playerScore, true)) {
             playerThirdCard = this.shoe.deal();
@@ -128,25 +144,31 @@ class BaccaratGame {
             playerScore = BaccaratGame.score(this.playerHand);
         }
         
-        // Check if banker needs third card
+        //3rd banker check
         const playerThirdCardValue = playerThirdCard ? 
-        (["Jack", "Queen", "King", "10"].includes(playerThirdCard.value) ? 0 : "Ace" === playerThirdCard.value ? 1 : parseInt(playerThirdCard.value)) : -1;
+            (["Jack", "Queen", "King", "10"].includes(playerThirdCard.value) ? 0 : 
+             "Ace" === playerThirdCard.value ? 1 : parseInt(playerThirdCard.value)) : -1;
         
         if (BaccaratGame.needsThirdCard(this.bankerHand, bankerScore, false, playerThirdCardValue)) {
             this.bankerHand.push(this.shoe.deal());
             bankerScore = BaccaratGame.score(this.bankerHand);
         }
         
-        return this.determineWinner();
+        const winner = this.determineWinner();
+        
+        //payout
+        if (playerBetAmount > 0) {
+            Betting.Payout(winner, 'player', playerBetAmount);
+        }
+        if (bankerBetAmount > 0) {
+            Betting.Payout(winner, 'banker', bankerBetAmount);
+        }
+        if (tieBetAmount > 0) {
+            Betting.Payout(winner, 'tie', tieBetAmount);
+        }
+        
+        return winner;
     }
-  /*
-    bet = parseInt(document.getElementById("playerBet").value);
-    if (isNaN(bet) || bet <= 0 || bet > GoonCoin) {
-        alert("Invalid bet amount!");
-        return;
-    }
-    GoonCoin -= bet;
-  */
 }
 
 class Betting {
@@ -155,14 +177,14 @@ class Betting {
             return false;
         }
         GoonCoin -= amount;
-        updateBalence();
+        updateBalance();
         return true;
     }
 
-    Payout(winner, betType, betAmount){
+    static Payout(winner, betType, betAmount){
         let multiplier = 0;
         if (winner === betType){
-            if (winner === tie) {
+            if (winner === 'tie') {
                 multiplier = 8;
             }
             else{
@@ -171,7 +193,7 @@ class Betting {
         }
         const winnings = betAmount + (betAmount * multiplier);
         GoonCoin += winnings;
-        updateBalence();
+        updateBalance();
 
         return winnings;
 
@@ -179,45 +201,72 @@ class Betting {
 }
 
 function updateDisplay(){
-  //get the html element id of player card and dealer card section
-  const playerCardsDiv = document.getElementById("player-cards");
-  const dealerCardsDiv = document.getElementById("dealer-cards");
-  //get the inner html element of player and dealer card section
-  playerCardsDiv.innerHTML = "";
-  dealerCardsDiv.innerHTML = "";
+    const playerCardsDiv = document.getElementById("playerCards .cardRow");
+    const dealerCardsDiv = document.getElementById("dealerCards");
+    const playerScoreDiv = document.getElementById("playerScore");
+    const dealerScoreDiv = document.getElementById("dealerScore");
 
-  const suitMap = {
-    'Hearts': 'Hearts',
-    'Spades': 'Spades',
-    'Diamonds': 'Diamonds',
-    'Clubs': 'Clubs'
-  };
-  for (let card of playerHand){
-    const img = document.createElement("img");
-    img.src = `../images/Cards/card${suitMap[card.suit]}${card.value}.png`;
-    img.classList.add("card");
-    playerCardsDiv.appendChild(img);
-  }
-  dealerHand.forEach((card, index) => {
-  const img = document.createElement("img");
-    img.classList.add("card");
-    dealerCardsDiv.appendChild(img);
-  });
-  document.getElementById("player-score").textContent = "Score: " + getScore(playerHand);
-  if (dealerHiddenCard) {
-    document.getElementById("dealer-score").textContent = "Score: ?";
-  } else {
-    document.getElementById("dealer-score").textContent = "Score: " + getScore(dealerHand);
-  }
+    playerCardsDiv.innerHTML = "";
+    dealerCardsDiv.innerHTML = "";
+
+    const suitMap = {
+        'Hearts': 'Hearts',
+        'Spades': 'Spades',
+        'Diamonds': 'Diamonds',
+        'Clubs': 'Clubs'
+    };
+    //display player cards and score
+    playerHand.forEach(card => {
+        const img = document.createElement("img");
+        img.src = `../images/Cards/card${card.suit}${card.value}.png`;
+        img.classList.add("card");
+        playerCardsDiv.appendChild(img);
+    });
+    
+    const playerScore = BaccaratGame.score(playerHand);
+    playerScoreDiv.textContent = `Score: ${playerScore}`;
+    
+    //display banker cards and score
+    bankerHand.forEach(card => {
+        const img = document.createElement("img");
+        img.src = `../images/Cards/card${card.suit}${card.value}.png`;
+        img.classList.add("card");
+        dealerCardsDiv.appendChild(img);
+    });
+    
+    const bankerScore = BaccaratGame.score(bankerHand);
+    dealerScoreDiv.textContent = `Score: ${bankerScore}`;
+}
+
+function startGame(){
+    playerHand = [];
+    bankerHand = [];
+
+    game = new BaccaratGame();
+
+    const winner = game.playGame();
+
+    if (winner){
+        playerHand = game.playerHand
+        bankerHand = game.bankerHand
+
+        updateDisplay();
+
+        setTimeout(() => {
+            alert(`Game Over! Winner: ${winner.toUpperCase()}\nYour balance: $${GoonCoin}`);
+        }, 500);
+    }
 }
 
 function getScore(hand){
     let score = 0; 
     for (let card of hand) {
         if (["Jack", "Queen", "King"].includes(card.value)) score += 10;
-        elif ("Ace".includes(card.value)){
+        else if ("Ace".includes(card.value)){
             score += 1;
-        }else score += parseInt(card.value);
+        }else{ 
+            score += parseInt(card.value);
+        }
     }
     return score % 10;
 }
