@@ -8,6 +8,12 @@ const decks = 5
 const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
 const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
 
+//game vars
+let playerHand = [];
+let bankerHand = [];
+letcurrentBet = 0;
+let betType = '';
+
 document.addEventListener("DOMContentLoaded", () => {
   let balanceDisplay = document.getElementById("balance");
   balanceDisplay.textContent = GoonCoin;
@@ -55,43 +61,121 @@ class Shoe {
 }
 
 class BaccaratGame {
+    constructor() {
+        this.Shoe = new Shoe();
+        this.playerHand = [];
+        this.bankerHand = [];
+        this.betAmount = 0;
+        this.betType = '';
+    }
+
+    static score(hand) {
+        let score = 0;
+        for (let card of hand) {
+            if (["Jack", "Queen", "King", "10"].includes(card.value)) {
+                score += 0;
+            } else if ("Ace" === card.value) {
+                score += 1;
+            } else {
+                score += parseInt(card.value);
+        }
+    }
+    return score % 10;
+    }
+
+  
+    static needsThirdCard(hand, score, isPlayer, bankerThirdCardValue) {
+        if (hand.length === 2) {
+        if (isPlayer) {
+            // Player draws third card if score is 0-5
+            return score <= 5;
+        } else {
+            // Banker drawing rules are more complex
+            if (score <= 2) return true;
+            if (score === 3 && bankerThirdCardValue !== 8) return true;
+            if (score === 4 && bankerThirdCardValue >= 2 && bankerThirdCardValue <= 7) return true;
+            if (score === 5 && bankerThirdCardValue >= 4 && bankerThirdCardValue <= 7) return true;
+            if (score === 6 && bankerThirdCardValue >= 6 && bankerThirdCardValue <= 7) return true;
+        }
+        }
+        return false;
+    }
+
+    determineWinner() {
+        const playerScore = BaccaratGame.score(this.playerHand);
+        const bankerScore = BaccaratGame.score(this.bankerHand);
+        
+        if (playerScore > bankerScore) return 'player';
+        if (bankerScore > playerScore) return 'banker';
+        return 'tie';
+    } 
+    playGame(betAmount, betType) {
+        this.betAmount = betAmount;
+        this.betType = betType;
+        
+        // Deal initial cards
+        this.playerHand = [this.shoe.deal(), this.shoe.deal()];
+        this.bankerHand = [this.shoe.deal(), this.shoe.deal()];
+        
+        let playerScore = BaccaratGame.score(this.playerHand);
+        let bankerScore = BaccaratGame.score(this.bankerHand);
+        
+        // Check if player needs third card
+        let playerThirdCard = null;
+        if (BaccaratGame.needsThirdCard(this.playerHand, playerScore, true)) {
+            playerThirdCard = this.shoe.deal();
+            this.playerHand.push(playerThirdCard);
+            playerScore = BaccaratGame.score(this.playerHand);
+        }
+        
+        // Check if banker needs third card
+        const playerThirdCardValue = playerThirdCard ? 
+        (["Jack", "Queen", "King", "10"].includes(playerThirdCard.value) ? 0 : "Ace" === playerThirdCard.value ? 1 : parseInt(playerThirdCard.value)) : -1;
+        
+        if (BaccaratGame.needsThirdCard(this.bankerHand, bankerScore, false, playerThirdCardValue)) {
+            this.bankerHand.push(this.shoe.deal());
+            bankerScore = BaccaratGame.score(this.bankerHand);
+        }
+        
+        return this.determineWinner();
+    }
+  /*
     bet = parseInt(document.getElementById("playerBet").value);
     if (isNaN(bet) || bet <= 0 || bet > GoonCoin) {
         alert("Invalid bet amount!");
         return;
     }
     GoonCoin -= bet;
-    updateBalance();
-
-    score(hand) {
-
-    }
-
-    thirdcard() {
-
-    }
-
-    winner() {
-
-    }
-
-    game() {
-
-    }
+  */
 }
 
 class Betting {
-    placeBet(type, amount){
-
+    static placeBet(type, amount){
+        if (amount <= 0 || amount  > GoonCoin) {
+            return false;
+        }
+        GoonCoin -= amount;
+        updateBalence();
+        return true;
     }
 
-    Payout(winner){
+    Payout(winner, betType, betAmount){
+        let multiplier = 0;
+        if (winner === betType){
+            if (winner === tie) {
+                multiplier = 8;
+            }
+            else{
+                multiplier = 1;
+            }
+        }
+        const winnings = betAmount + (betAmount * multiplier);
+        GoonCoin += winnings;
+        updateBalence();
+
+        return winnings;
 
     }
-    
-    //clearBet(){}
-
-    //doubleBet(){}
 }
 
 function updateDisplay(){
