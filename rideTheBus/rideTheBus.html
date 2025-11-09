@@ -1,3 +1,8 @@
+<!-- rideTheBus.html -->
+<!-- EECS 581: Group 21 Project 3               -->
+<!-- The HTML Website Section for the ride the bus game of Codesino.         -->
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,14 +20,25 @@
 
   <main style="text-align:center;">
     <h2>
-      <img src="images/BUS.jpg" alt="Bus"> <br> BUS
+      <img src="images/BUS.jpg" alt="Bus"><br>BUS
     </h2>
 
     <div>
-      <button id="cardDraw">Draw card</button>
+      <label for="betAmount">Buy-in ($): </label> <!--TODO MAKE CURRENCY TRACK AND GLOBAL TO OTHER GAMES-->
+      <input type="number" id="betAmount" value="10" min="1"> #
     </div>
 
-    <p id="card-field-1" style="text-align:center;">temp</p>
+    <div id="gameArea">
+      <button id="startGame">Start Game</button>
+      <p id="instructions">Click "Start Game" to begin!</p>
+      <div id="buttons"></div>
+      <p id="card-field-1">No card drawn yet.</p>
+      <p id="result"></p>
+    </div>
   </main>
+
+  <div id="return">
+    <button id="back" onclick="document.location='../default.html'">Back</button>
+  </div>
 </body>
 </html>

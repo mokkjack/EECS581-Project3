@@ -3,3 +3,12 @@ h1{
     font-size: 40px;
     color:black
 }
+
+#card-field-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 20px;
+}
