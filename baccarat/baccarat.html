@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>CODE-SINO Baccarat</title>
@@ -8,48 +7,53 @@
     <script src="../home_func.js" defer></script>
     <script src="baccaratlogic.js" defer></script>
   </head>
+
   <body style="background-color: rgb(40, 132, 60);">
-        <h1 class="title">baccarat </h1>
+    <h1 class="title">Baccarat</h1>
 
-        <div id="table"></div>
-          <div id="balance-area">
-            Balance: $<span id="balance">0</span>
-          </div>
+    <div id="balance-area">
+      Balance: $<span id="balance">0</span>
+    </div>
 
-          <div id="playerCards">
-            <h2>Player</h2>
-            <div id="playerCards" class="cardRow"></div>
-            <div id="playerScore"></div>
-          </div>
+    <!--player section-->
+    <div id="playerSection">
+      <h2>Player</h2>
+      <div class="cardRow" id="playerCards"></div>
+      <div id="playerScore"></div>
+    </div>
 
-          <div id="bankerCards">
-            <h2>Dealer</h2>
-            <div id="dealerCards" class="cardRow"></div>
-            <div id="dealerScore"></div>
-          </div>
+    <!--banker section-->
+    <div id="bankerSection">
+      <h2>Dealer</h2>
+      <div class="cardRow" id="dealerCards"></div>
+      <div id="dealerScore"></div>
+    </div>
 
-          <div id="playerBet">
-            <label for="bet">Player<br>Payout: 1|1</label>
-            <input type="number" id="playerBet" min="1" value="0">
-          </div>
+    <!--result-->
+    <div id="gameResult" class="game-result"></div>
 
-          <div id="tieBet">
-            <label for="bet">Tie<br>Payout: 8|1</label>
-            <input type="number" id="tieBet" min="1" value="0">
-          </div>
+    <!--bets-->
+    <div id="bets">
+      <div class="betOption">
+        <label for="playerBetInput">Player<br>Payout: 1|1</label>
+        <input type="number" id="playerBetInput" min="0" value="0">
+      </div>
 
-          <div id="bankerBet">
-            <label for="bet">Banker<br>Payout: 1|1</label>
-            <input type="number" id="bankerBet" min="1" value="0">
-          </div>
+      <div class="betOption">
+        <label for="tieBetInput">Tie<br>Payout: 8|1</label>
+        <input type="number" id="tieBetInput" min="0" value="0">
+      </div>
 
-          <div id="deal">
-            <button id="playBtn">DEAL</button>
-          </div>
+      <div class="betOption">
+        <label for="bankerBetInput">Banker<br>Payout: 1|1</label>
+        <input type="number" id="bankerBetInput" min="0" value="0">
+      </div>
+    </div>
 
-        </div>
-        <div id="bottom">
-          <button id="back" onclick="goBack()">Back</button>
-        </div>
+    <!--buttons-->
+    <div id="controls">
+      <button id="playBtn">DEAL</button>
+      <button id="backBtn">Back</button>
+    </div>
   </body>
 </html>
