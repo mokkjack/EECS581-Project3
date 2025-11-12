@@ -139,11 +139,58 @@ function load_cards() {
     return card_stack;
 }
 
+/************************************
+ * Picture Poker Helper Functions   *
+ *                                  *
+ ************************************/
+
+//Create Card Array Function
+function create_card_array(container_name) {
+    //Local Variable
+    var card_array = [];
+
+    //Collect Cards from Container
+    let cards = container_name.querySelectorAll('*');
+    cards.forEach(card => {
+        card_array.push(card);
+    })
+    return card_array
+}
+
+//
+function count_card(card_array) {
+    //Create Card Rank Count Array
+    let rank_count_array = [];
+    rank_count_array.length = 6;
+
+    for (let i = 0; i < 6; i++) {
+        let count = 0;
+        for (let j = 0; j < card_array.length; j++) {
+            if (card_array[j] === ranks[i]) count++;
+        }
+    rank_count_array.push(count);
+    }
+    
+    //temp bug test
+    for (let k = 0; k < 6; k++) {
+        console.log(rank_count_array[k]);
+    }
+}
+
 /***********************
  * Hands
- *
+ * 
  * 
  ************************/
+//
+function check_hand(container_name) {
+    let card_array = create_card_array(container_name);
+    count_card(card_array);
+
+
+    return;
+
+}
 
 //Clear Function
 function clear(container_name) {
@@ -160,7 +207,7 @@ function find_value_of_card(card) {
     return ranks.indexOf(rank);
 }
 
-//Tally Score Function
+//Tally Score Function {{{{{{{kill
 function tally_score() {
 
 }
@@ -211,6 +258,8 @@ function dealer_plays() {
     /* Smart Selection Function here*/
     sort(OTHER_HAND);
     unhide_cards();
+    check_hand(THIS_HAND);
+    check_hand(OTHER_HAND);
     
     
 }
@@ -240,5 +289,6 @@ function distribute() {
 function start() {
     deck = load_cards();
     distribute();
+    
 }
     
