@@ -42,3 +42,9 @@ Note:   blackjack logic done
         refactor default.html for changes in home_func.js
         some minor bug fixing
 =================
+= 11/12/2025 =====
+User: Evan
+Time: 2 hours
+Note:   added arrays to count rank amounts
+        cleaned up code for picture poker javascript
+=================

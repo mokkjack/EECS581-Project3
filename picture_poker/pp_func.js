@@ -7,7 +7,7 @@
 
 //Definitions
 
-//Global Variables
+// --------- Global Variables ---------
 const THIS_HAND = document.getElementById('bottom');
 const OTHER_HAND = document.getElementById('top');
 let THIS_HAND_COUNT = 0;
@@ -17,7 +17,7 @@ let NEXT_PHASE = false;
 var deck;
 const ranks = ['S_CARD', 'A_CARD', 'B_CARD', 'C_CARD', 'D_CARD', 'F_CARD'];
 
-//Stack Data Structure (Array Implementation) 
+// --------- Stack Data Structure (Array Implementation) ---------
 //Used GeeksforGeeks for array implementation idea
 class Stack {
     constructor() { //Construct Stack Array
@@ -58,7 +58,7 @@ class Stack {
     }
 }
 
-//Card Class
+// --------- Card Class ---------
 class Card {
     constructor(rank) { //Create Card & Set Type
         this.rank = rank;
@@ -166,15 +166,13 @@ function count_card(card_array) {
     for (let i = 0; i < 6; i++) {
         let count = 0;
         for (let j = 0; j < card_array.length; j++) {
-            if (card_array[j] === ranks[i]) count++;
+            if (card_array[j].id == ranks[i]) count++;
         }
-    rank_count_array.push(count);
+    rank_count_array[i] = count;
     }
+    console.log(rank_count_array);
+
     
-    //temp bug test
-    for (let k = 0; k < 6; k++) {
-        console.log(rank_count_array[k]);
-    }
 }
 
 /***********************
