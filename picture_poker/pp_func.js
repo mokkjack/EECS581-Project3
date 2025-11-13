@@ -144,7 +144,7 @@ function load_cards() {
  *                                  *
  ************************************/
 
-//Create Card Array Function
+//Create Card Array Function [HELPER]
 function create_card_array(container_name) {
     //Local Variable
     var card_array = [];
@@ -157,7 +157,22 @@ function create_card_array(container_name) {
     return card_array
 }
 
-//
+//Find Largest Count Function [HELPER]
+function find_largest_count(count_array) {
+    var LARGEST_COUNT = -1;
+    var LARGEST_COUNT_INDEX = -1;
+
+    for (let i = 0; i < count_array.length; i++) {
+        if (count_array[i] > LARGEST_COUNT) {
+            LARGEST_COUNT = count_array[i];
+            LARGEST_COUNT_INDEX = i;
+        }
+    }
+    console.log(LARGEST_COUNT, LARGEST_COUNT_INDEX);
+
+}
+
+//Count Card Type Amount Function
 function count_card(card_array) {
     //Create Card Rank Count Array
     let rank_count_array = [];
@@ -170,20 +185,19 @@ function count_card(card_array) {
         }
     rank_count_array[i] = count;
     }
-    console.log(rank_count_array);
 
-    
+    return rank_count_array;
 }
 
-/***********************
- * Hands
- * 
- * 
- ************************/
+
 //
 function check_hand(container_name) {
     let card_array = create_card_array(container_name);
-    count_card(card_array);
+    let count_array = count_card(card_array);
+    find_largest_count(count_array);
+
+    console.log('check_hand');
+    console.log(card_array, count_array);
 
 
     return;
