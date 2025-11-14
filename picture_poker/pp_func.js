@@ -12,11 +12,12 @@ const THIS_HAND = document.getElementById('bottom');
 const OTHER_HAND = document.getElementById('top');
 let THIS_HAND_COUNT = 0;
 let OTHER_HAND_COUNT = 0;
-let PLAYING = false;
-let NEXT_PHASE = false;
+
 var deck;
 const ranks = ['S_CARD', 'A_CARD', 'B_CARD', 'C_CARD', 'D_CARD', 'F_CARD'];
 const hands = ['FIVE_OF_A_KIND', 'FOUR_OF_A_KIND', 'FULL_HOUSE', 'THREE_OF_A_KIND', 'TWO_PAIR', 'PAIR', 'HIGH_CARD'];
+
+const DISCARD_BUTTON = document.getElementById('discard_button');
 
 // --------- Stack Data Structure (Array Implementation) ---------
 //Used GeeksforGeeks for array implementation idea
@@ -170,16 +171,16 @@ function find_second_pair(count_array, LARGEST_COUNT_INDEX) {
 function fit_hands(count_array, LARGEST_COUNT, LARGEST_COUNT_INDEX) {
     //Find the highest hand
     switch (LARGEST_COUNT) {
-        case 1: return hands[6];
-        case 2: 
+        case 1: return hands[6];    //High Card
+        case 2:                     //Pair or Two Pair
             if (find_second_pair(count_array, LARGEST_COUNT_INDEX)) return hands[4];
             else return hands[5];
-        case 3:
+        case 3:                     //Three of a Kind or Full House
             if (find_second_pair(count_array, LARGEST_COUNT_INDEX)) return hands[2];
             else return hands[3];
-        case 4: return hands[1];
-        case 5: return hands[0];
-        default: return hands[6];
+        case 4: return hands[1];    //Four of a Kind
+        case 5: return hands[0];    //Five of a Kind
+        default: return hands[6];   //High Card (Default)
     }
 }
 
@@ -222,6 +223,23 @@ function count_card(card_array) {
     return rank_count_array;
 }
 
+//Hand Value Search Function [HELPER]
+function find_hand_value(hand_name) {
+    for (let i = 0; i < hands.length; i++) {
+        if (hand_name == hands[i]) return i;
+    }
+    return -1;
+}
+
+//Remove EventListener Function [HELPER]
+function remove_event_listener() {
+    let cards = THIS_HAND.querySelectorAll('*');
+    cards.forEach(card => {
+        card.removeEventListener("click", () => card.select_toggle());
+    })
+    return;
+}
+
 /************************
  * Main Game Functions
  * 
@@ -241,7 +259,13 @@ function check_hand(container_name) {
     hand_info[2] = current_hand[1];
 
     return hand_info;
+}
 
+//Clear Value Function
+function clear_value(container_name) {
+    if (container_name == THIS_HAND) THIS_HAND_COUNT = 0;
+    else OTHER_HAND_COUNT = 0;
+    return;
 }
 
 //Clear Function
@@ -250,7 +274,7 @@ function clear(container_name) {
     cards.forEach(card => {
         card.remove();
     })
-    
+    clear_value(container_name);
     return;
 }
 
@@ -312,7 +336,11 @@ function distribute() {
 
 //
 function compare_hands(this_data, other_data) {
-
+    //Compare Hands
+    if (find_hand_value(this_data[1]) < find_hand_value(other_data[1])) return true;
+    else if (find_hand_value(this_data[1]) > find_hand_value(other_data[1])) return false;
+    //Compare Weight
+    else console.log("tie");
 }
 
 //Smart Dealer Function
@@ -321,31 +349,51 @@ function dealer_plays() {
   
 }
 
-//Finish Turn Function
+/*
+ * Picture Poker Turn-Related Functions *
+ */
+
+//Turn (Refill Deck & Clear Hands & Distribute Cards) Function
 function finish_turn() {
+    //Refill Deck
+    if (deck.size() < 11) {
+        deck = load_cards();
+    }
+
     clear(THIS_HAND);
     clear(OTHER_HAND);
-    console.log(deck.peek());
     distribute();
+    console.log(deck.size());
+    DISCARD_BUTTON.disabled = false;
 }
 
-//Turn Continuation Function
+//Turn (Dealer Plays & Hands Comparision & Currency Distributed) Function
 function continue_turn() {
     let this_data = check_hand(THIS_HAND);
     let other_data = check_hand(OTHER_HAND);
     unhide_cards();
-    console.log(this_data, other_data);
-    finish_turn();
 
+    console.log(this_data, other_data);
+    if (compare_hands(this_data, other_data)) { //TRUE = WIN | FALSE = LOSE
+        console.log("WINNER");
+    } else {
+        console.log("LOSER");
+    }
+
+    setTimeout(finish_turn, 3000);
 }
 
-//Discard Card Function
-function discard() {
+//Turn (Discard Card) Function
+function discard() { //start_turn Function
     let selected_cards = document.querySelectorAll(".selected");
     selected_cards.forEach(card => {
         card.remove();
         THIS_HAND_COUNT--;
     })
+
+    remove_event_listener(); //FIX THIS
+    DISCARD_BUTTON.disabled = true;   
+
     draw_cards(deck, THIS_HAND);
     continue_turn();
     return;
