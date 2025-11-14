@@ -16,6 +16,7 @@ let PLAYING = false;
 let NEXT_PHASE = false;
 var deck;
 const ranks = ['S_CARD', 'A_CARD', 'B_CARD', 'C_CARD', 'D_CARD', 'F_CARD'];
+const hands = ['FIVE_OF_A_KIND', 'FOUR_OF_A_KIND', 'FULL_HOUSE', 'THREE_OF_A_KIND', 'TWO_PAIR', 'PAIR', 'HIGH_CARD'];
 
 // --------- Stack Data Structure (Array Implementation) ---------
 //Used GeeksforGeeks for array implementation idea
@@ -157,27 +158,60 @@ function create_card_array(container_name) {
     return card_array
 }
 
+//Second Pair Search Function [HELPER]
+function find_second_pair(count_array, LARGEST_COUNT_INDEX) {
+    for (let i = 0; i < count_array.length; i++) {
+        if (count_array[i] == 2 && !(i == LARGEST_COUNT_INDEX)) return true;
+    }
+    return false;
+}
+
+//Fit Hands Function [HELPER]
+function fit_hands(count_array, LARGEST_COUNT, LARGEST_COUNT_INDEX) {
+    //Find the highest hand
+    switch (LARGEST_COUNT) {
+        case 1: return hands[6];
+        case 2: 
+            if (find_second_pair(count_array, LARGEST_COUNT_INDEX)) return hands[4];
+            else return hands[5];
+        case 3:
+            if (find_second_pair(count_array, LARGEST_COUNT_INDEX)) return hands[2];
+            else return hands[3];
+        case 4: return hands[1];
+        case 5: return hands[0];
+        default: return hands[6];
+    }
+}
+
 //Find Largest Count Function [HELPER]
 function find_largest_count(count_array) {
+    //Local Variables
+    var hand_info = [];
+    hand_info.length = 2;
     var LARGEST_COUNT = -1;
     var LARGEST_COUNT_INDEX = -1;
 
+    //
     for (let i = 0; i < count_array.length; i++) {
         if (count_array[i] > LARGEST_COUNT) {
             LARGEST_COUNT = count_array[i];
             LARGEST_COUNT_INDEX = i;
         }
     }
-    console.log(LARGEST_COUNT, LARGEST_COUNT_INDEX);
-
+    let current_hand = fit_hands(count_array, LARGEST_COUNT, LARGEST_COUNT_INDEX);
+    let weight = ranks[LARGEST_COUNT_INDEX];
+    hand_info[0] = current_hand;
+    hand_info[1] = weight;
+    return hand_info;
 }
 
-//Count Card Type Amount Function
+//Count Card Type Amount Function [HELPER]
 function count_card(card_array) {
     //Create Card Rank Count Array
     let rank_count_array = [];
     rank_count_array.length = 6;
 
+    //
     for (let i = 0; i < 6; i++) {
         let count = 0;
         for (let j = 0; j < card_array.length; j++) {
@@ -185,22 +219,28 @@ function count_card(card_array) {
         }
     rank_count_array[i] = count;
     }
-
     return rank_count_array;
 }
 
+/************************
+ * Main Game Functions
+ * 
+ ************************/
 
-//
+//Get Hand Information Function
 function check_hand(container_name) {
+    let hand_info = [];
+    hand_info.length = 3;
+
     let card_array = create_card_array(container_name);
     let count_array = count_card(card_array);
-    find_largest_count(count_array);
+    let current_hand = find_largest_count(count_array);
 
-    console.log('check_hand');
-    console.log(card_array, count_array);
+    hand_info[0] = count_array;
+    hand_info[1] = current_hand[0];
+    hand_info[2] = current_hand[1];
 
-
-    return;
+    return hand_info;
 
 }
 
@@ -210,6 +250,7 @@ function clear(container_name) {
     cards.forEach(card => {
         card.remove();
     })
+    
     return;
 }
 
@@ -217,11 +258,6 @@ function clear(container_name) {
 function find_value_of_card(card) {
     const rank = card.getAttribute('id');
     return ranks.indexOf(rank);
-}
-
-//Tally Score Function {{{{{{{kill
-function tally_score() {
-
 }
 
 //Unhide Function
@@ -233,6 +269,7 @@ function unhide_cards() {
     return;
 }
 
+/*
 //Sort Function (Bubble Sort)
 function sort(container_name) {
     let card_array = []; //Card Array
@@ -264,18 +301,43 @@ function sort(container_name) {
     }
 
 }
+*/
 
-//Dealer Function
-function dealer_plays() {
-    /* Smart Selection Function here*/
-    sort(OTHER_HAND);
-    unhide_cards();
-    check_hand(THIS_HAND);
-    check_hand(OTHER_HAND);
-    
-    
+//Distribute Cards Function
+function distribute() {
+    draw_cards(deck, THIS_HAND);
+    draw_cards(deck, OTHER_HAND);
+    return;
 }
 
+//
+function compare_hands(this_data, other_data) {
+
+}
+
+//Smart Dealer Function
+function dealer_plays() {
+    /* Smart Selection Function here*/
+  
+}
+
+//Finish Turn Function
+function finish_turn() {
+    clear(THIS_HAND);
+    clear(OTHER_HAND);
+    console.log(deck.peek());
+    distribute();
+}
+
+//Turn Continuation Function
+function continue_turn() {
+    let this_data = check_hand(THIS_HAND);
+    let other_data = check_hand(OTHER_HAND);
+    unhide_cards();
+    console.log(this_data, other_data);
+    finish_turn();
+
+}
 
 //Discard Card Function
 function discard() {
@@ -285,15 +347,7 @@ function discard() {
         THIS_HAND_COUNT--;
     })
     draw_cards(deck, THIS_HAND);
-    sort(THIS_HAND);
-    dealer_plays();
-    return;
-}
-
-//Distribute Cards Function
-function distribute() {
-    draw_cards(deck, THIS_HAND);
-    draw_cards(deck, OTHER_HAND);
+    continue_turn();
     return;
 }
 
