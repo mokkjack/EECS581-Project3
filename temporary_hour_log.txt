@@ -48,3 +48,10 @@ Time: 2 hours
 Note:   added arrays to count rank amounts
         cleaned up code for picture poker javascript
 =================
+= 11/15/2025 =====
+User: Evan
+Time: 3 hours
+Note:   hand comparison
+        display winner/loser based on hand
+        
+=================

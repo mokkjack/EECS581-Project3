@@ -7,19 +7,30 @@
 
 //Definitions
 
-// --------- Global Variables ---------
+/* ============================================ *
+ * Global Variables                             *
+ * ============================================ */
+//Hand Variables
 const THIS_HAND = document.getElementById('bottom');
 const OTHER_HAND = document.getElementById('top');
 let THIS_HAND_COUNT = 0;
 let OTHER_HAND_COUNT = 0;
 
+//Deck Variables
 var deck;
 const ranks = ['S_CARD', 'A_CARD', 'B_CARD', 'C_CARD', 'D_CARD', 'F_CARD'];
 const hands = ['FIVE_OF_A_KIND', 'FOUR_OF_A_KIND', 'FULL_HOUSE', 'THREE_OF_A_KIND', 'TWO_PAIR', 'PAIR', 'HIGH_CARD'];
 
+//Button Variables
 const DISCARD_BUTTON = document.getElementById('discard_button');
 
-// --------- Stack Data Structure (Array Implementation) ---------
+//Currency Variables
+var BET_AMOUNT = 100;
+
+/* ============================================ *
+ * Classes                                      *
+ * ============================================ */
+//Stack Data Structure (Array Implementation)
 //Used GeeksforGeeks for array implementation idea
 class Stack {
     constructor() { //Construct Stack Array
@@ -60,7 +71,7 @@ class Stack {
     }
 }
 
-// --------- Card Class ---------
+//Card Class
 class Card {
     constructor(rank) { //Create Card & Set Type
         this.rank = rank;
@@ -105,6 +116,12 @@ class Card {
     }
 }
 
+
+
+/* ============================================ *
+ * Deck Functions                               *
+ * ============================================ */
+
 //Random Number Function
 function random_number_generator() {
     let rng_value = Math.floor(Math.random() * 60);
@@ -141,25 +158,13 @@ function load_cards() {
     return card_stack;
 }
 
-/************************************
- * Picture Poker Helper Functions   *
- *                                  *
- ************************************/
 
-//Create Card Array Function [HELPER]
-function create_card_array(container_name) {
-    //Local Variable
-    var card_array = [];
 
-    //Collect Cards from Container
-    let cards = container_name.querySelectorAll('*');
-    cards.forEach(card => {
-        card_array.push(card);
-    })
-    return card_array
-}
+/* ============================================ *
+ * Hand Functions                               *
+ * ============================================ */
 
-//Second Pair Search Function [HELPER]
+//Second Pair Search Function
 function find_second_pair(count_array, LARGEST_COUNT_INDEX) {
     for (let i = 0; i < count_array.length; i++) {
         if (count_array[i] == 2 && !(i == LARGEST_COUNT_INDEX)) return true;
@@ -167,7 +172,7 @@ function find_second_pair(count_array, LARGEST_COUNT_INDEX) {
     return false;
 }
 
-//Fit Hands Function [HELPER]
+//Fit Hands Function
 function fit_hands(count_array, LARGEST_COUNT, LARGEST_COUNT_INDEX) {
     //Find the highest hand
     switch (LARGEST_COUNT) {
@@ -184,7 +189,7 @@ function fit_hands(count_array, LARGEST_COUNT, LARGEST_COUNT_INDEX) {
     }
 }
 
-//Find Largest Count Function [HELPER]
+//Find Largest Count Function
 function find_largest_count(count_array) {
     //Local Variables
     var hand_info = [];
@@ -206,7 +211,7 @@ function find_largest_count(count_array) {
     return hand_info;
 }
 
-//Count Card Type Amount Function [HELPER]
+//Count Card Type Amount Function
 function count_card(card_array) {
     //Create Card Rank Count Array
     let rank_count_array = [];
@@ -223,43 +228,33 @@ function count_card(card_array) {
     return rank_count_array;
 }
 
-//Hand Value Search Function [HELPER]
+
+
+/* ============================================ *
+ * Find Functions                               *
+ * ============================================ */
+
+//Hand Value Search Function
 function find_hand_value(hand_name) {
-    for (let i = 0; i < hands.length; i++) {
-        if (hand_name == hands[i]) return i;
-    }
-    return -1;
+    return hands.indexOf(hand_name);
 }
 
-//Remove EventListener Function [HELPER]
-function remove_event_listener() {
-    let cards = THIS_HAND.querySelectorAll('*');
-    cards.forEach(card => {
-        card.removeEventListener("click", () => card.select_toggle());
-    })
-    return;
+//Rank Value Search Function (RANK NAME)
+function find_rank_value(rank_name) {
+    return ranks.indexOf(rank_name);
 }
 
-/************************
- * Main Game Functions
- * 
- ************************/
-
-//Get Hand Information Function
-function check_hand(container_name) {
-    let hand_info = [];
-    hand_info.length = 3;
-
-    let card_array = create_card_array(container_name);
-    let count_array = count_card(card_array);
-    let current_hand = find_largest_count(count_array);
-
-    hand_info[0] = count_array;
-    hand_info[1] = current_hand[0];
-    hand_info[2] = current_hand[1];
-
-    return hand_info;
+//Rank Value Search Function (CARD)
+function find_value_of_card(card) {
+    const rank = card.getAttribute('id');
+    return ranks.indexOf(rank);
 }
+
+
+
+/* ============================================ *
+ * Container Functions                          *
+ * ============================================ */
 
 //Clear Value Function
 function clear_value(container_name) {
@@ -278,17 +273,55 @@ function clear(container_name) {
     return;
 }
 
-//Value Function
-function find_value_of_card(card) {
-    const rank = card.getAttribute('id');
-    return ranks.indexOf(rank);
+//Create Card Array Function
+function create_card_array(container_name) {
+    //Local Variable
+    var card_array = [];
+
+    //Collect Cards from Container
+    let cards = container_name.querySelectorAll('*');
+    cards.forEach(card => {
+        card_array.push(card);
+    })
+    return card_array
 }
+
+//Get Hand Information Function
+function check_hand(container_name) {
+    let hand_info = [];
+    hand_info.length = 3;
+
+    let card_array = create_card_array(container_name);
+    let count_array = count_card(card_array);
+    let current_hand = find_largest_count(count_array);
+
+    hand_info[0] = count_array;
+    hand_info[1] = current_hand[0];
+    hand_info[2] = current_hand[1];
+
+    return hand_info;
+}
+
+
+
+/* ============================================ *
+ * Minor Functions                              *
+ * ============================================ */
 
 //Unhide Function
 function unhide_cards() {
     let hidden_cards = document.querySelectorAll(".hidden");
     hidden_cards.forEach(card => {
         card.classList.remove("hidden");
+    })
+    return;
+}
+
+//Remove EventListener Function
+function remove_event_listener() {
+    let cards = THIS_HAND.querySelectorAll('*');
+    cards.forEach(card => {
+        card.removeEventListener("click", () => card.select_toggle());
     })
     return;
 }
@@ -334,24 +367,57 @@ function distribute() {
     return;
 }
 
-//
+//New Round Function
+function new_round() {
+    //Clear Board
+    clear(THIS_HAND);
+    clear(OTHER_HAND);
+
+    distribute();
+    DISCARD_BUTTON.disabled = false;
+    return;
+}
+
+//Compare Function
 function compare_hands(this_data, other_data) {
+    //Local Variables
+    let THIS_HAND_VALUE = find_hand_value(this_data[1]);
+    let THIS_HAND_RANK = find_rank_value(this_data[2]);
+    let OTHER_HAND_VALUE = find_hand_value(other_data[1]);
+    let OTHER_HAND_RANK = find_rank_value(other_data[2]);
+
     //Compare Hands
-    if (find_hand_value(this_data[1]) < find_hand_value(other_data[1])) return true;
-    else if (find_hand_value(this_data[1]) > find_hand_value(other_data[1])) return false;
-    //Compare Weight
-    else console.log("tie");
+    if (THIS_HAND_VALUE < OTHER_HAND_VALUE) return 'WIN';
+    else if (THIS_HAND_VALUE > OTHER_HAND_VALUE) return 'LOSE';
+
+    //Compare Weight (OTHERS)
+    else if (THIS_HAND_RANK < OTHER_HAND_RANK) return 'WIN';
+    else if (THIS_HAND_RANK > OTHER_HAND_RANK) return 'LOSE';
+
+    /*
+    //Compare Weight (FULL HOUSE & TWO PAIR)
+    else if () return 'WIN';
+    else if () return 'LOSE';
+    */
+    else return 'TIE';
 }
 
 //Smart Dealer Function
 function dealer_plays() {
+    //Do Nothing if FIVE_OF_A_KIND or FULL_HOUSE
+    //DISCARD ONE CARD IF FOUR_OF_A_KIND or TWO PAIRS
+    //DISCARD TWO CARDS IF THREE_OF_A_KIND
+    //DISCARD THREE CARDS IF PAIR or HIGH CARD
     /* Smart Selection Function here*/
+    let data = check_hand(OTHER_HAND);
+    console.log(data[1], data[2]); //data[1] is hand
+
   
 }
 
-/*
- * Picture Poker Turn-Related Functions *
- */
+/* ============================================ *
+ * Turn-Related Functions                       *
+ * ============================================ */
 
 //Turn (Refill Deck & Clear Hands & Distribute Cards) Function
 function finish_turn() {
@@ -360,27 +426,36 @@ function finish_turn() {
         deck = load_cards();
     }
 
-    clear(THIS_HAND);
-    clear(OTHER_HAND);
-    distribute();
+    new_round();
     console.log(deck.size());
-    DISCARD_BUTTON.disabled = false;
+    
 }
 
 //Turn (Dealer Plays & Hands Comparision & Currency Distributed) Function
 function continue_turn() {
+    //Dealer Plays
+    dealer_plays();
+
+    //Create Data
     let this_data = check_hand(THIS_HAND);
     let other_data = check_hand(OTHER_HAND);
-    unhide_cards();
-
     console.log(this_data, other_data);
-    if (compare_hands(this_data, other_data)) { //TRUE = WIN | FALSE = LOSE
-        console.log("WINNER");
-    } else {
-        console.log("LOSER");
-    }
 
-    setTimeout(finish_turn, 3000);
+    //Show Results
+    unhide_cards();
+    var GAME_RESULT = compare_hands(this_data, other_data); //GAME_RESULT -> WIN | LOSE | DRAW
+
+    if (GAME_RESULT == 'WIN') {
+        GoonCoin += BET_AMOUNT;
+        updateBalance();
+        console.log("winner");
+    } else if (GAME_RESULT == 'LOSE') {
+        GoonCoin -= BET_AMOUNT;
+        updateBalance();
+        console.log("loser");
+    } else console.log("draw");    
+
+    setTimeout(finish_turn, 3000); //3 Second Delay
 }
 
 //Turn (Discard Card) Function
@@ -403,6 +478,21 @@ function discard() { //start_turn Function
 function start() {
     deck = load_cards();
     distribute();
-    
 }
+
+/* ============================================ *
+ * Picture Poker Currency Functions             *
+ * ============================================ */
+
+//Update Currency Function
+function updateBalance() { 
+  document.getElementById("balance").textContent = GoonCoin; 
+  saveGoonCoin(); 
+}
+
+//Bank Load Currency On-Start Up Function
+window.addEventListener("DOMContentLoaded", () => {
+    let balanceDisplay = document.getElementById("balance");
+    balanceDisplay.textContent = GoonCoin; 
+});
     
