@@ -1,5 +1,126 @@
-h1{
-    text-align: center;
-    font-size: 40px;
-    color:white
+/*style*/
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: rgb(40, 132, 60);
+  color: white;
+  text-align: center;
 }
+
+.title {
+  font-size: 3rem;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/*balence*/
+#balance-area {
+  font-size: 1.4rem;
+  margin: 20px auto;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.35);
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 12px;
+}
+
+/*play area*/
+
+/*background areas*/
+#playerSection,
+#bankerSection {
+  width: 70%;
+  margin: 25px auto;
+  padding: 25px 20px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 18px;
+}
+
+#playerSection h2,
+#bankerSection h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 10px;
+}
+
+.cardRow img {
+  width: 90px;
+  height: 130px;
+  border-radius: 8px;
+}
+
+#playerScore, #dealerScore {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/*result*/
+.game-result {
+  margin-top: 30px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/*betting*/
+#bets {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.betOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.betOption input {
+  width: 85px;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  text-align: center;
+}
+
+/* buttons */
+
+#controls {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+#controls button {
+  padding: 14px 30px;
+  font-size: 1.25rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: gold;
+  color: black;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+#controls button:hover {
+  background: rgb(255, 230, 90);
+  transform: scale(1.06);
+}
+
+#controls button:active {
+  transform: scale(0.97);
+}
+
