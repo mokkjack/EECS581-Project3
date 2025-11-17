@@ -24,14 +24,28 @@
         
         <title> CODE-SINO SPRINT BANK </title>    
     </head>
+
     <body onload="updateCurrencyDisplay()">
         <h1> SPRINT Bank </h1> 
-        <p id="currency"> </p>
+        <p> "Make More of What's Yours" </p>
+
+        <!-- PLayer Currency Section -->
+        <div id="Currency_Section">
+            <p id="currency"></p>
+        </div>
+        
         <h2> YOU HAVE BEEN BAILED OUT <span id="bailout-count">0</span> TIMES</h2>
 
-        <div id="BankOptions">
+        <!-- Bank Bailout Section -->
+        <div id="Bailout_Section">
             <li><button id="bailout" onclick="bailout()"> Bail me out!</button> </li>
         </div>
+
+        <!-- Bank Shop Section -->
+        <div id="Shop_Section">
+            <button class="item" onclick="yes()"> O </button>
+        </div>
+
         <div id="bottom">
             <button id="back" onclick="document.location='../default.html'">Back</button>
         </div>

@@ -11,19 +11,31 @@
  * ======================================================================== */
 
 //Global Variables
-let balanceDisplay = document.getElementById("balance");
-let bailoutCountDisplay = document.getElementById("bailout-count");
+var currencyDisplay = document.getElementById("currency");
+var balanceDisplay = document.getElementById("balance");
+var bailoutCountDisplay = document.getElementById("bailout-count");
+
+
+//confirm test
+function yes() {
+  if (confirm(`Confirm Purchase of ...`)) {
+    console.log("Proceeding...");
+  } else {
+    console.log("Action canceled.");
+  }
+}
+
+
+//Update Balance Function
+function updateBalance() {
+  currencyDisplay.textContent = GoonCoin;
+  bailoutCountDisplay.textContent = bailouttime;
+  saveGoonCoin();
+  saveBailoutTime();
+}
 
 //On-Load Function
 document.addEventListener("DOMContentLoaded", () => {
   balanceDisplay.textContent = GoonCoin;
   bailoutCountDisplay.textContent = bailouttime;
 });
-
-//Update Balance Function
-function updateBalance() {
-  document.getElementById("currency").textContent = GoonCoin;
-  document.getElementById("bailout-count").textContent = bailouttime;
-  saveGoonCoin();
-  saveBailoutTime();
-}

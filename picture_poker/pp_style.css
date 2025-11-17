@@ -28,6 +28,14 @@
   height: 50px;
  }
 
+ #back {
+  position: fixed;
+  width: 200px;
+  height: 75px;
+  bottom: 20px;
+  left: 20px;
+ }
+
 /* Card Designs
  * CSS Styling for All Rank Cards
  * CSS Styling for Hidden Card
