@@ -1,9 +1,14 @@
-//pp_func.js
-
-/* EECS 581: Group 21 Project 3
- * The JavaScript Section for Picture Poker
- * of Codesino.
- */
+/* ======================================================================== *
+ * Prologue Comments for pp_func.js                                         *
+ * File Name: pp_func.js                                                    *
+ * Author: Evan Zhuo                                                        *
+ * EECS 581: Group 21 Project 3                                             *
+ * ------------------------------------------------------------------------ *
+ * Picture Poker Game Logic                                                 *
+ * Inputs/Outputs                                                           *
+ *  Inputs:     User Bet Increment | Card Select | Discard                  *
+ *  Outputs:    Change in Currency Amount                                   *
+ * ======================================================================== */
 
 //Definitions
 

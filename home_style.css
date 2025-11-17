@@ -1,9 +1,14 @@
-/* home_style.css */
-
-/* EECS 581: Group 21 Project 3
- * The CSS Styling Section for the Homepage
- * of Codesino.
- */
+/* ======================================================================== *
+ * Prologue Comments for home_style.css                                     *
+ * File Name: home_style.css                                                *
+ * Authors: 
+ * EECS 581: Group 21 Project 3                                             *
+ * ------------------------------------------------------------------------ *
+ * Code-sino Homepage Style                                                 *
+ * Inputs/Outputs                                                           *
+ *  Inputs:     None                                                        *
+ *  Outputs:    Website Design                                              *
+ * ======================================================================== */
 
 h1 {
     text-align: center;

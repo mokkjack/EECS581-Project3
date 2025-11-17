@@ -1,12 +1,19 @@
-/*Prologue comment:
-File Name: home_func
-EECS 581 Project 3
-Author: Zhang Chen
-Purpose: This file provide the logic for a global currency named GoonCoin and bailouttime(temp)
-This file mainly provide the logic for a global currency and bailout function that will bre presistent across multiple game
-Input: None
-Output: Show user's global currency in the main menu, and reflect the changed io it, also provide a initial amount.
-*/
+/* ======================================================================== *
+ * Prologue Comments for home_func.js                                       *
+ * File Name: home_func.js                                                  *
+ * Authors: Zhang Chen                                                      *
+ * EECS 581: Group 21 Project 3                                             *
+ * ------------------------------------------------------------------------ *
+ * Code-sino Homepage Function                                              *
+ * Inputs/Outputs                                                           *
+ *  Inputs:     None                                                        *
+ *  Outputs:    Show user's global currency in the main menu, and reflect   *
+ *              the changed io it, also provide a initial amount.           *
+ *  Purpose:    This file provide the logic for a global currency named     *
+ *              GoonCoin and bailouttime(temp). This file mainly provide    *
+ *              the logic for a global currency and bailout function that   *
+ *              will be presistent across multiple game.                    *
+ * ======================================================================== */
 
 //a global variable for bailout time
 var bailouttime = parseInt(sessionStorage.getItem("bailouttime")) || 0;
