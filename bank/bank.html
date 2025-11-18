@@ -26,14 +26,14 @@
     </head>
 
     <body onload="updateCurrencyDisplay()">
-        <h1> SPRINT Bank </h1> 
+        <div id="SPRINT_LOGO"> <img id="SPRINT_BANK_LOGO" src="../images/SPRINT_BANK_LOGO.png" width=200px; height="auto"> </div>
         <p> "Make More of What's Yours" </p>
 
         <!-- PLayer Currency Section -->
         <div id="Currency_Section">
             <p id="currency"></p>
         </div>
-        
+            
         <h2> YOU HAVE BEEN BAILED OUT <span id="bailout-count">0</span> TIMES</h2>
 
         <!-- Bank Bailout Section -->
@@ -43,8 +43,14 @@
 
         <!-- Bank Shop Section -->
         <div id="Shop_Section">
-            <button class="item" onclick="yes()"> O </button>
-        </div>
+            <li>
+                <button>1</button>
+                <button>1</button>
+                <button>1</button>
+                <button>1</button>
+                <button>1</button>
+            </li>
+         </div>
 
         <div id="bottom">
             <button id="back" onclick="document.location='../default.html'">Back</button>

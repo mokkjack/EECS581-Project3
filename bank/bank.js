@@ -15,17 +15,6 @@ var currencyDisplay = document.getElementById("currency");
 var balanceDisplay = document.getElementById("balance");
 var bailoutCountDisplay = document.getElementById("bailout-count");
 
-
-//confirm test
-function yes() {
-  if (confirm(`Confirm Purchase of ...`)) {
-    console.log("Proceeding...");
-  } else {
-    console.log("Action canceled.");
-  }
-}
-
-
 //Update Balance Function
 function updateBalance() {
   currencyDisplay.textContent = GoonCoin;
