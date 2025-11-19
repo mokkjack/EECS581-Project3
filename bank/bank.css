@@ -27,19 +27,19 @@
   * ======================================================================= */
 
   #gacha_button {
-   width: 100px;
-   height: 50px;
+   width: 300px;
+   height: 150px;
   }
 
 
   .common {
-   background-color: rgb(192, 192, 192);
+   background-color: rgb(65, 105, 225);
   }
 
   .rare {
-   background-color: rgb(255, 165, 0);
+   background-color: rgb(120, 81, 169);
   }
 
   .ultra {
-   background-color: rgb(166, 216, 223);
+   background-color: rgb(255, 208, 23);
   }

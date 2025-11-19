@@ -23,19 +23,67 @@ function updateBalance() {
   saveBailoutTime();
 }
 
-/* ======================================
- * Gacha Mechanism & Themes
+/* ====================================== *
+ * Gacha Mechanism & Themes               *
+ * ====================================== *
+ * Themes:                                *
+ * 0  = Default Theme                     *
+ * 1  = Dark Theme                        *
+ * 2  = Red Theme                         *
+ * 3  = Blue Theme                        *
+ * 4  = Yellow Theme                      *
+ * 5  = Green Theme                       *
+ * 6  = Comic-Sans Theme                  *
+ * 7  = Donkey Stare Theme                *
+ * 8  = Silver Theme                      *
+ * 9  = Master's Theorem Theme            *
+ * 10 = Minesweeper Theme                 *
+ * 11 = Gold Theme                        *
  * ====================================== */
 
 //Global Gacha Variables
 const gacha_button = document.getElementById("gacha_button");
-var unlocked_themes = [1, 0, 0, 0]; // 1 = UNLOCKED | 0 = LOCKED
-/* add more based on themes */
+var unlocked_themes = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1 = UNLOCKED | 0 = LOCKED
 
 //Random Number Function
 function random_number_generator() {
     let rng_value = Math.floor(Math.random() * 100);
     return rng_value;
+}
+
+//Unlock Checker Function
+function unlock_check(array_index) {
+  if (unlocked_themes[array_index] === 1) {
+    console.log("duplicate");
+    return;
+  } else {
+    unlocked_themes[array_index] = 1;
+    console.log("you won!");
+  }
+
+}
+
+//Unlock Theme Function
+function unlock(number) {
+  if (number < 0) return;
+  else if (number < 13) {
+    unlock_check(1);
+  } else if (number < 25) {
+    unlock_check(2);
+  } else if (number < 37) {
+    unlock_check(3);
+  } else if (number < 49) {
+    unlock_check(4);
+  } else if (number < 61) {
+    unlock_check(5);
+  } else if (number < 71) {
+    unlock_check(6);
+  } else if (number < 81) {
+    unlock_check(7);
+  } else if (number < 91) {
+    unlock_check(8);
+  } else if (number < )
+
 }
 
 //Gacha Rarity Function
@@ -75,9 +123,12 @@ function gacha_add_colors(number) {
  * 91-100:  Ultra   *
  * ================ */
 function gacha() {
+  //Local Variable
+  let final_delay = 5500; 
 
+  //Gacha Button Color Change
   for (let i = 0; i < 10; i++) {
-    let delay = i * 700;
+    let delay = i * 500;
     
     setTimeout( () => {
       let rng_value = random_number_generator();
@@ -89,8 +140,17 @@ function gacha() {
     }, delay + 400);
   }
 
-  let rng_value = random_number_generator();
-  gacha_add_colors(rng_value);
+  //Gacha Reward
+  setTimeout( () => {
+    let rng_value = random_number_generator();
+    gacha_add_colors(rng_value);
+    let r = rarity(rng_value);
+  }, final_delay);
+
+  setTimeout( () => {
+    gacha_remove_color();
+  }, final_delay + 5000);
+  return;
 }
 
 
