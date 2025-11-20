@@ -310,6 +310,68 @@ function check_hand(container_name) {
 
 
 /* ============================================ *
+ * Comparison Second Pair Function              *
+ * ============================================ */
+
+//Compare Second Hand Function
+function compare_second_hand(array_data) {
+    let = second_pair_rank = -1;
+    for (let i = array_data.size - 1; i >= 0; i--) {
+        if (array_data[i] == 2) {
+            second_pair_rank = i;
+            break;
+        }
+    }
+    return second_pair_rank;
+}
+
+
+
+/* ============================================ *
+ * Sort Function                                *
+ * ============================================ */
+
+//Sort Function
+function sort() {
+    //Local Variables
+    var sorted_THIS_HAND = [];
+    var sorted_OTHER_HAND = [];
+    let data_THIS = check_hand(THIS_HAND);
+    let data_OTHER = check_hand(OTHER_HAND);
+
+    //Sort THIS_HAND
+    if (data_THIS[1] == "FIVE_OF_A_KIND") {
+        let cards = THIS_HAND.querySelectorAll('*');
+        cards.forEach(card => {
+            sorted_THIS_HAND.push(card);
+        })
+        console.log(sorted_THIS_HAND);
+        
+    } else if (data_THIS[1] == "FOUR_OF_A_KIND") {
+        let cards = THIS_HAND.querySelectorAll('*');
+        cards.forEach(card => {
+            sorted_THIS_HAND.push(card);
+        })
+        console.log(sorted_THIS_HAND);
+
+    } else (data_THIS[1] == "FOUR_OF_A_KIND") {
+        let cards = THIS_HAND.querySelectorAll('*');
+        cards.forEach(card => {
+            sorted_THIS_HAND.push(card);
+        })
+        console.log(sorted_THIS_HAND);
+
+    }
+
+
+
+
+
+}
+
+
+
+/* ============================================ *
  * Minor Functions                              *
  * ============================================ */
 
@@ -330,40 +392,6 @@ function remove_event_listener() {
     })
     return;
 }
-
-/*
-//Sort Function (Bubble Sort)
-function sort(container_name) {
-    let card_array = []; //Card Array
-
-    //Pushing Cards into the Array
-    let cards = container_name.querySelectorAll('*');
-    cards.forEach(card => {
-        card_array.push(card);
-    })
-
-    //Bubble Sort
-    for (let i = 0; i < 4; i++) {
-        swap = false;
-        for (let j = 0; j < 4 - i; j++) {
-            let comparable1 = find_value_of_card(card_array[j]);
-            let comparable2 = find_value_of_card(card_array[j+1]);
-            if (comparable1 > comparable2) {
-                [card_array[j], card_array[j+1]] = [card_array[j+1], card_array[j]]; //Swap
-                swap = true;
-            }
-        }
-        if (!(swap)) break; //Early Termination
-    }
-
-    //Clear & Place Sorted Hand
-    clear(container_name);
-    for (let k = 0; k < 5; k++) {
-        card_array.forEach(card => container_name.appendChild(card));
-    }
-
-}
-*/
 
 //Distribute Cards Function
 function distribute() {
@@ -399,26 +427,55 @@ function compare_hands(this_data, other_data) {
     else if (THIS_HAND_RANK < OTHER_HAND_RANK) return 'WIN';
     else if (THIS_HAND_RANK > OTHER_HAND_RANK) return 'LOSE';
 
-    /*
     //Compare Weight (FULL HOUSE & TWO PAIR)
-    else if () return 'WIN';
-    else if () return 'LOSE';
-    */
+    else if (compare_second_hand(this_data[0]) < compare_second_hand(other_data[0])) return 'WIN';
+    else if (compare_second_hand(this_data[0]) > compare_second_hand(other_data[0])) return 'LOSE';
+    
     else return 'TIE';
 }
 
 //Smart Dealer Function
 function dealer_plays() {
-    //Do Nothing if FIVE_OF_A_KIND or FULL_HOUSE
-    //DISCARD ONE CARD IF FOUR_OF_A_KIND or TWO PAIRS
-    //DISCARD TWO CARDS IF THREE_OF_A_KIND
-    //DISCARD THREE CARDS IF PAIR or HIGH CARD
-    /* Smart Selection Function here*/
+    //Local Variable
     let data = check_hand(OTHER_HAND);
-    console.log(data[1], data[2]); //data[1] is hand
 
-  
+    //Check Hand & Discard Accordingly
+    if (data[1] == hands[0] || data[1] == hands[2]) return; //Do Nothing if FIVE_OF_A_KIND or FULL_HOUSE
+    else if (data[1] == hands[1] || data[1] == hands[4]) { //DISCARD ONE CARD IF FOUR_OF_A_KIND or TWO PAIRS
+        for (let i = 5; i >= 0; i--) {
+            if (data[0][i] == 1) {
+                let delete_card = OTHER_HAND.querySelectorAll(`#${ranks[i]}`);
+                delete_card[0].remove();
+                OTHER_HAND_COUNT--;
+                break;
+            }
+        }
+
+    } else if (data[1] == hands[3]) { //DISCARD TWO CARDS IF THREE_OF_A_KIND
+        for (let i = 5; i >= 0; i--) {
+            if (data[0][i] == 1) {
+                let delete_card = OTHER_HAND.querySelectorAll(`#${ranks[i]}`);
+                delete_card[0].remove();
+                OTHER_HAND_COUNT--;
+            }
+        }
+
+    } else { //DISCARD THREE CARDS IF PAIR or HIGH CARD
+        let counter = 0;
+        for (let i = 5; i >= 0; i--) {
+            if (counter == 3) break;
+            if (data[0][i] == 1) {
+                let delete_card = OTHER_HAND.querySelectorAll(`#${ranks[i]}`);
+                delete_card[0].remove();
+                OTHER_HAND_COUNT--;
+                counter++;
+            }
+        }
+    }
+    return;
 }
+
+
 
 /* ============================================ *
  * Turn-Related Functions                       *
@@ -440,11 +497,16 @@ function finish_turn() {
 function continue_turn() {
     //Dealer Plays
     dealer_plays();
+    draw_cards(deck, OTHER_HAND);
 
     //Create Data
     let this_data = check_hand(THIS_HAND);
     let other_data = check_hand(OTHER_HAND);
     console.log(this_data, other_data);
+
+    //Sort Hands
+    sort();
+
 
     //Show Results
     unhide_cards();
