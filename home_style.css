@@ -16,6 +16,10 @@ h1 {
     font-size: 50px;
 }
 
+#currency {
+    text-align: center;
+}
+
 #cat {
     text-align: center;
 }

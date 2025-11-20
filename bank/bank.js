@@ -23,6 +23,8 @@ function updateBalance() {
   saveBailoutTime();
 }
 
+
+
 /* ====================================== *
  * Gacha Mechanism & Themes               *
  * ====================================== *
@@ -36,7 +38,7 @@ function updateBalance() {
  * 6  = Comic-Sans Theme                  *
  * 7  = Donkey Stare Theme                *
  * 8  = Silver Theme                      *
- * 9  = Master's Theorem Theme            *
+ * 9  = Special Theme                     *
  * 10 = Minesweeper Theme                 *
  * 11 = Gold Theme                        *
  * ====================================== */
@@ -44,6 +46,20 @@ function updateBalance() {
 //Global Gacha Variables
 const gacha_button = document.getElementById("gacha_button");
 var unlocked_themes = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1 = UNLOCKED | 0 = LOCKED
+
+//Gacha Cost Function
+function gacha_cost() {
+  //Transaction Check
+  if (GoonCoin - 500 >= 0) {
+    console.log("transaction completed!");
+    return true;
+
+  //Unable to Complete Transaction
+  } else {
+    console.log("Can't even sub to Pokimane smh. You broke-ahh boy");
+    return false;
+  }
+}
 
 //Random Number Function
 function random_number_generator() {
@@ -58,6 +74,7 @@ function unlock_check(array_index) {
     return;
   } else {
     unlocked_themes[array_index] = 1;
+    console.log(unlocked_themes);
     console.log("you won!");
   }
 
@@ -65,25 +82,31 @@ function unlock_check(array_index) {
 
 //Unlock Theme Function
 function unlock(number) {
-  if (number < 0) return;
-  else if (number < 13) {
+  if (number < 0) return;   //Invalid Number
+  else if (number < 13) {   //Dark Theme
     unlock_check(1);
-  } else if (number < 25) {
+  } else if (number < 25) { //Red Theme
     unlock_check(2);
-  } else if (number < 37) {
+  } else if (number < 37) { //Blue Theme
     unlock_check(3);
-  } else if (number < 49) {
+  } else if (number < 49) { //Yellow Theme
     unlock_check(4);
-  } else if (number < 61) {
+  } else if (number < 61) { //Green Theme
     unlock_check(5);
-  } else if (number < 71) {
+  } else if (number < 71) { //Theme 6
     unlock_check(6);
-  } else if (number < 81) {
+  } else if (number < 81) { //Theme 7
     unlock_check(7);
-  } else if (number < 91) {
+  } else if (number < 91) { //Silver Theme
     unlock_check(8);
-  } else if (number < )
-
+  } else if (number < 95) { //Special Theme
+    unlock_check(9);
+  } else if (number < 98) { //Minesweeper Theme
+    unlock_check(10);
+  } else if (number < 101) { //Gold Theme
+    unlock_check(11);
+  }
+  return;
 }
 
 //Gacha Rarity Function
@@ -126,32 +149,40 @@ function gacha() {
   //Local Variable
   let final_delay = 5500; 
 
-  //Gacha Button Color Change
-  for (let i = 0; i < 10; i++) {
-    let delay = i * 500;
-    
+  //Gacha Transaction Check
+  if (gacha_cost()) {
+    //Gacha Button Color Change
+    for (let i = 0; i < 10; i++) {
+      let delay = i * 500;
+      
+      setTimeout( () => {
+        let rng_value = random_number_generator();
+        gacha_add_colors(rng_value);
+      }, delay);
+
+      setTimeout( () => {
+        gacha_remove_color();
+      }, delay + 400);
+    }
+
+    //Gacha Reward
     setTimeout( () => {
       let rng_value = random_number_generator();
       gacha_add_colors(rng_value);
-    }, delay);
+      unlock(rng_value);
+    }, final_delay);
 
     setTimeout( () => {
       gacha_remove_color();
-    }, delay + 400);
+    }, final_delay + 5000);
+    return;
+
+  } else {
+    alert("no money");
+    return;
   }
-
-  //Gacha Reward
-  setTimeout( () => {
-    let rng_value = random_number_generator();
-    gacha_add_colors(rng_value);
-    let r = rarity(rng_value);
-  }, final_delay);
-
-  setTimeout( () => {
-    gacha_remove_color();
-  }, final_delay + 5000);
-  return;
 }
+
 
 
 //On-Load Function

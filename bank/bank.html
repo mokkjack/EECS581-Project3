@@ -26,8 +26,17 @@
     </head>
 
     <body onload="updateCurrencyDisplay()">
-        <div id="SPRINT_LOGO"> <img id="SPRINT_BANK_LOGO" src="../images/SPRINT_BANK_LOGO.png" width=200px; height="auto"> </div>
-        <p> "Make More of What's Yours" </p>
+        <div id="SPRINT_LOGO"> <img id="SPRINT_BANK_LOGO" src="../images/SPRINT_BANK_LOGO.png" width=150px; height="auto"> </div>
+        <p id="click_bar">
+            <button id="left_toolbar" class="toolbar"> Checking </button>
+            <button class="toolbar"> Savings & CDs </button>
+            <button class="toolbar"> Credit cards </button>
+            <button class="toolbar"> Home loans </button>
+            <button class="toolbar"> Auto </button>
+            <button class="toolbar"> Investing by J.P. Morgan </button>
+            <button class="toolbar"> Education & goals </button>
+            <button class="toolbar"> Travel </button>
+        </p>
 
         <!-- PLayer Currency Section -->
         <div id="Currency_Section">
@@ -43,7 +52,7 @@
 
         <!-- Bank Shop Section -->
         <div id="Shop_Section">
-            <button id="gacha_button" onclick="gacha()"> Gacha </button>
+            <button id="gacha_button" onclick="gacha()"> Gacha<br>(Cost: 500G) </button>
         </div>
 
         <div id="bottom">

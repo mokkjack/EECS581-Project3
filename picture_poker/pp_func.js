@@ -427,7 +427,7 @@ function dealer_plays() {
 //Turn (Refill Deck & Clear Hands & Distribute Cards) Function
 function finish_turn() {
     //Refill Deck
-    if (deck.size() < 11) {
+    if (deck.size() < 16) {
         deck = load_cards();
     }
 

@@ -10,6 +10,30 @@
  *  Outputs:    Website Design                                              *
  * ======================================================================== */
 
+body {
+   background-image: url(../images/SPRINT_BANK_BACKGROUND.png);
+   margin-left: 300px;
+}
+
+.toolbar {
+   background: none;
+   border: none;
+   font-size: 14px;
+   color: black;
+   padding-right: 30px;
+   cursor: pointer;
+}
+
+.toolbar:hover {
+   color: rgb(0, 162, 232);
+   text-decoration: underline;
+   text-decoration-thickness: 3px;
+}
+
+ #SPRINT_LOGO {
+   margin-top: 20px;
+ }
+
  #back {
     position: fixed;
     width: 200px;
@@ -29,8 +53,8 @@
   #gacha_button {
    width: 300px;
    height: 150px;
+   cursor: pointer;
   }
-
 
   .common {
    background-color: rgb(65, 105, 225);
