@@ -330,7 +330,7 @@ function compare_second_hand(array_data) {
 /* ============================================ *
  * Sort Function                                *
  * ============================================ */
-
+/*
 //Sort Function
 function sort() {
     //Local Variables
@@ -368,7 +368,7 @@ function sort() {
 
 
 }
-
+*/
 
 
 /* ============================================ *
@@ -505,7 +505,7 @@ function continue_turn() {
     console.log(this_data, other_data);
 
     //Sort Hands
-    sort();
+    //sort();
 
 
     //Show Results
