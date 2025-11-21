@@ -25,6 +25,28 @@ function updateBalance() {
 
 
 
+/* ======================================================================== *
+ * Bail Out Functions                                                       *
+ * ======================================================================== */
+
+//Save Bail Out Time Function
+function saveBailoutTime() {
+  sessionStorage.setItem("bailouttime", bailouttime);
+}
+
+//Bail Out Function
+function bailout() {
+  if (GoonCoin === 0) {
+    GoonCoin += 1000;
+    bailouttime += 1;
+    saveGoonCoin();
+    saveBailoutTime();
+    updateCurrencyDisplay();
+  }
+}
+
+
+
 /* ====================================== *
  * Gacha Mechanism & Themes               *
  * ====================================== *

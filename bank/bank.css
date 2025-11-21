@@ -10,9 +10,15 @@
  *  Outputs:    Website Design                                              *
  * ======================================================================== */
 
+html {
+   font-family: sans-serif;
+}
+
 body {
    background-image: url(../images/SPRINT_BANK_BACKGROUND.png);
    margin-left: 300px;
+   width: fit-content;
+   height: fit-content;
 }
 
 .toolbar {
@@ -30,6 +36,38 @@ body {
    text-decoration-thickness: 3px;
 }
 
+#Bank_Main {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+
+   border: 6px solid gray;
+   border-radius: 10px;
+
+   margin-top: 35px;
+   width: 1200px;
+   height: 500px;
+   background-color: white;
+}
+
+#Main_subtitle {
+   margin-left: 15px;
+   margin-bottom: 0px;
+}
+
+#User_Bar {
+ margin-left: 20px;
+ padding: 15px;
+
+ border: 4px solid;
+ width: 400px;
+ height: 100px;
+}
+
+#Bailout_Section {
+   padding: 15px;
+   border: 3px solid;
+}
+
  #SPRINT_LOGO {
    margin-top: 20px;
  }
@@ -43,8 +81,21 @@ body {
  }
 
  #currency {
-    font-size: 30px;
+    font-size: 40px;
  }
+
+ #total_checking {
+   font-size: 40px;
+   margin-top: 30px;
+   text-align: right;
+ }
+
+ #available_balance {
+   margin-top: -45px;
+   text-align: right;
+ }
+
+
 
  /* ======================================================================= *
   * Gacha Colors                                                            *

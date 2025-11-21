@@ -165,6 +165,7 @@ function load_cards() {
 
 
 
+
 /* ============================================ *
  * Hand Functions                               *
  * ============================================ */
@@ -322,6 +323,7 @@ function compare_second_hand(array_data) {
             break;
         }
     }
+    console.log(second_pair_rank);
     return second_pair_rank;
 }
 
@@ -330,7 +332,10 @@ function compare_second_hand(array_data) {
 /* ============================================ *
  * Sort Function                                *
  * ============================================ */
-/*
+
+//Array Move Back Function
+function array_move_back_one(array) {}
+
 //Sort Function
 function sort() {
     //Local Variables
@@ -339,36 +344,40 @@ function sort() {
     let data_THIS = check_hand(THIS_HAND);
     let data_OTHER = check_hand(OTHER_HAND);
 
-    //Sort THIS_HAND
-    if (data_THIS[1] == "FIVE_OF_A_KIND") {
-        let cards = THIS_HAND.querySelectorAll('*');
+    //Sort by Rank (THIS_HAND)
+    for (let i = 0; i < 6; i++) {
+        let cards = THIS_HAND.querySelectorAll(`#${ranks[i]}`);
         cards.forEach(card => {
             sorted_THIS_HAND.push(card);
         })
-        console.log(sorted_THIS_HAND);
-        
-    } else if (data_THIS[1] == "FOUR_OF_A_KIND") {
-        let cards = THIS_HAND.querySelectorAll('*');
-        cards.forEach(card => {
-            sorted_THIS_HAND.push(card);
-        })
-        console.log(sorted_THIS_HAND);
-
-    } else (data_THIS[1] == "FOUR_OF_A_KIND") {
-        let cards = THIS_HAND.querySelectorAll('*');
-        cards.forEach(card => {
-            sorted_THIS_HAND.push(card);
-        })
-        console.log(sorted_THIS_HAND);
-
     }
 
+    //Sort by Rank (OTHER_HAND)
+    for (let i = 0; i < 6; i++) {
+        let cards = OTHER_HAND.querySelectorAll(`#${ranks[i]}`);
+        cards.forEach(card => {
+            sorted_OTHER_HAND.push(card);
+        })
+    }
 
+    //Redistribute Sorted Hand (THIS_HAND)
+    clear(THIS_HAND);
+    for (let i = 0; i < 5; i++) {
+        sorted_THIS_HAND.forEach(card => THIS_HAND.appendChild(card));
+        THIS_HAND_COUNT++;
+    }
 
+    //Redistribute Sorted Hand (OTHER_HAND)
+    clear(OTHER_HAND);
+    for (let i = 0; i < 5; i++) {
+        sorted_OTHER_HAND.forEach(card => OTHER_HAND.appendChild(card));
+        OTHER_HAND_COUNT++;
+    }
 
+    console.log(sorted_THIS_HAND);
 
 }
-*/
+
 
 
 /* ============================================ *
@@ -505,8 +514,7 @@ function continue_turn() {
     console.log(this_data, other_data);
 
     //Sort Hands
-    //sort();
-
+    sort();
 
     //Show Results
     unhide_cards();

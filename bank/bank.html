@@ -40,22 +40,33 @@
         </p>
 
         <!-- PLayer Currency Section -->
-        <div id="Currency_Section">
-            <div>$<span id="currency"></span></div>
+        <div id="Bank_Main">
+            <div id="LEFT_Bank_Main">
+
+                <p id="Main_subtitle">Deposit Accounts</p>
+                <div id="User_Bar">
+                    TOTAL CHECKING<br>
+                    <p id="total_checking">$<span id="currency"></span>.00</p>
+                    <p id="available_balance">Available Balance</p>
+                </div>
+
+                <!-- Bank Shop Section -->
+                <div id="Shop_Section">
+                    <button id="gacha_button" onclick="gacha()"> Gacha<br>(Cost: $500) </button>
+                </div>
+            </div>
+
+            <div id="RIGHT_Bank_Main">
+
+                <!-- Bank Bailout Section -->
+                <div>
+                    <h2> YOU HAVE BEEN BAILED OUT <span id="bailout-count">0</span> TIMES</h2>
+                    <button id="bailout" onclick="bailout()"> Bail me out!</button>
+                </div>
+            </div>
+            
         </div>
             
-        <h2> YOU HAVE BEEN BAILED OUT <span id="bailout-count">0</span> TIMES</h2>
-
-        <!-- Bank Bailout Section -->
-        <div id="Bailout_Section">
-            <li><button id="bailout" onclick="bailout()"> Bail me out!</button> </li>
-        </div>
-
-        <!-- Bank Shop Section -->
-        <div id="Shop_Section">
-            <button id="gacha_button" onclick="gacha()"> Gacha<br>(Cost: $500) </button>
-        </div>
-
         <div id="bottom">
             <button id="back" onclick="document.location='../default.html'">Back</button>
         </div>
