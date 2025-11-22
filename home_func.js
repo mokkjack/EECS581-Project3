@@ -19,7 +19,8 @@
 var bailouttime = parseInt(sessionStorage.getItem("bailouttime")) || 0;
 
 //a global array for unlocked themes
-var unlocked_themes = sessionStorage.getItem("unlocked_themes") || [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1 = UNLOCKED | 0 = LOCKED
+var unlocked_themes_raw = sessionStorage.getItem("unlocked_themes");
+var unlocked_themes = JSON.parse(unlocked_themes_raw) || [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1 = UNLOCKED | 0 = LOCKED
 
 // Global GoonCoin
 var GoonCoin = sessionStorage.getItem("GoonCoin");
@@ -50,7 +51,7 @@ function saveBailoutTime() {
 
 // Save unlocked_themes to sessionStorage
 function saveThemeArray() {
-    sessionStorage.setItem("unlocked_themes", unlocked_themes);
+    sessionStorage.setItem("unlocked_themes", JSON.stringify(unlocked_themes));
 }
 
 // Bailout function

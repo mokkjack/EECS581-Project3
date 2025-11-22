@@ -226,8 +226,25 @@ function gacha() {
 
 
 
+//On-Load Theme Unlock Function
+function onload_theme_unlocker() {
+  let theme_buttons = gacha_theme_buttons.querySelectorAll('#Theme_Button');
+  for (let i = 0; i < 12; i++) {
+    if (unlocked_themes[i] === 1) {
+      theme_buttons.forEach(button => {
+      if (button.value == i + 1) {
+        button.classList.remove('locked');
+        button.classList.add('unlocked');
+      }
+      });
+    }
+  }
+}
+
+
 //On-Load Function
 document.addEventListener("DOMContentLoaded", () => {
+  onload_theme_unlocker();
   balanceDisplay.textContent = GoonCoin;
   bailoutCountDisplay.textContent = bailouttime;
 });
