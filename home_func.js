@@ -18,6 +18,9 @@
 //a global variable for bailout time
 var bailouttime = parseInt(sessionStorage.getItem("bailouttime")) || 0;
 
+//a global array for unlocked themes
+var unlocked_themes = sessionStorage.getItem("unlocked_themes") || [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1 = UNLOCKED | 0 = LOCKED
+
 // Global GoonCoin
 var GoonCoin = sessionStorage.getItem("GoonCoin");
 //if GoonCoin is not initialized, set the value as 1000, then save the currency into a session storage
@@ -29,6 +32,12 @@ if (GoonCoin === null) {
     GoonCoin = parseInt(GoonCoin);
 }
 
+
+
+/* ======================================================================== *
+ * Save Functions                                                           *
+ * ======================================================================== */
+
 // Save GoonCoin to sessionStorage
 function saveGoonCoin() {
     sessionStorage.setItem("GoonCoin", GoonCoin);
@@ -37,6 +46,11 @@ function saveGoonCoin() {
 // Save bailouttime to sessionStorage
 function saveBailoutTime() {
     sessionStorage.setItem("bailouttime", bailouttime);
+}
+
+// Save unlocked_themes to sessionStorage
+function saveThemeArray() {
+    sessionStorage.setItem("unlocked_themes", unlocked_themes);
 }
 
 // Bailout function
@@ -70,6 +84,12 @@ function updateCurrencyDisplay() {
         bailoutCountElement.textContent = bailouttime;
     }
 }
+
+
+
+/* ======================================================================== *
+ * Window Onload Function                                                   *
+ * ======================================================================== */
 
 // Called on initial load
 window.addEventListener("load", () => {

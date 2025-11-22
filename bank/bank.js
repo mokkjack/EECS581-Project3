@@ -67,18 +67,26 @@ function bailout() {
 
 //Global Gacha Variables
 const gacha_button = document.getElementById("gacha_button");
-var unlocked_themes = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1 = UNLOCKED | 0 = LOCKED
+const gacha_message = document.getElementById("Shop_subtitle");
+const gacha_theme_buttons = document.getElementById("theme_selector_section");
 
 //Gacha Cost Function
 function gacha_cost() {
   //Transaction Check
   if (GoonCoin - 500 >= 0) {
-    console.log("transaction completed!");
+    gacha_message.innerHTML = "Transaction Complete!";
+    setTimeout( () => {
+      gacha_message.innerHTML = "SPRINT Bank Theme Store";
+    }, 4000)
+    //Remove GoonCoin Here
     return true;
 
   //Unable to Complete Transaction
   } else {
-    console.log("Can't even sub to Pokimane smh. You broke-ahh boy");
+    gacha_message.innerHTML = "Can't even sub to Pokimane smh. You broke-ahh boy";
+    setTimeout( () => {
+      gacha_message.innerHTML = "SPRINT Bank Theme Store";
+    }, 4000)
     return false;
   }
 }
@@ -96,6 +104,17 @@ function unlock_check(array_index) {
     return;
   } else {
     unlocked_themes[array_index] = 1;
+
+    //Unlock Theme
+    let theme_buttons = gacha_theme_buttons.querySelectorAll('#Theme_Button');
+    theme_buttons.forEach(button => {
+      if (button.value == array_index + 1) {
+        button.classList.remove('locked');
+        button.classList.add('unlocked');
+      }
+    });
+
+    saveThemeArray();
     console.log(unlocked_themes);
     console.log("you won!");
   }
@@ -200,7 +219,7 @@ function gacha() {
     return;
 
   } else {
-    alert("no money");
+    alert("Unable to Complete Transaction.\nReason: Not Enough Currency.");
     return;
   }
 }
