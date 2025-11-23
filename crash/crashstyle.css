@@ -7,10 +7,15 @@
 
  h1 {
     text-align: center;
+    color: white;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 30px;
  }
 
+  body {
+    color: white;
+    background-color: black;
+  }
  #top {
    position: fixed;
    top: 0;

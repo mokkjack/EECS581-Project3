@@ -9,13 +9,16 @@
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="pp_style.css">
+        <link rel="stylesheet" type="text/css" href="crashstyle.css">
         <script src="../home_func.js" defer></script>
         <div id="balance-area">
             Balance: $<span id="balance">0</span>
         </div>
         <title> CODE-SINO CRASH </title>
-        <h1> CRASH </h1>
+        <h1>
+            <img src="../images/Crash/Logo.png" alt="Crash Game Logo" height="200">
+        </h1>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="crashFunc.js" defer></script>
     </head>
     <body>
@@ -28,6 +31,9 @@
         <div id="game-area">
             <div id="multiplier-display">
                 <h2>Multiplier: <span id="multiplier">0.00x</span></h2>
+            </div>
+            <div id="graph-area">
+                <canvas id="multiplierChart" width="600" height="200"></canvas>
             </div>
             <div id="controls">
                 <button id="startBtn">Start Game</button>

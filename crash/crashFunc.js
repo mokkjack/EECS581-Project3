@@ -7,13 +7,42 @@
 //  Outputs: Change in Balance
 
 //Global Variables
-let multiplier = 0.00; //Multiplier amount starting at 0
+let multiplier = 1; //Multiplier amount starting at 0
 let crashPoint = 0; //Point at which the game will "Crash" at
 let gameActive = false; //Is the game currently active
 let autoCashAmount = 0; //Auto cash-out number
 let intervalId = null; //Interval ID for game loop
 let betAmount = 0; //User bet amount
-
+let growthPerTick=0.01; //Growth rate per tick
+let multiplierChart;
+let multiplierData = {
+    labels: [],
+    datasets: [{
+        data: [],
+        borderColor: 'rgba(47, 255, 0, 1)',
+        fill: false,
+        tension: 0.1
+    }]
+};
+function initChart() {
+    const ctx = document.getElementById('multiplierChart').getContext('2d');
+    multiplierChart = new Chart(ctx, {
+        type: 'line',
+        data: multiplierData,
+        options: {
+            animation: true,
+            scales: {
+                x: { title: { display: true, text: 'Time' } },
+                y: { title: { display: true, text: 'Multiplier' }, min: 1 }
+            }
+        }
+    });
+}
+function updateChart(multiplier) {
+    multiplierData.labels.push(multiplierData.labels.length);
+    multiplierData.datasets[0].data.push(multiplier);
+    multiplierChart.update();
+}
  //UI Elements
 function updateBalance() { //Update balance display
   document.getElementById("balance").textContent = GoonCoin; //Update balance display
@@ -43,8 +72,10 @@ function startLoop() { //Start game loop
         }
 
         // multiplicative growth for accelerating multiplier
-        multiplier = multiplier + 0.01 * (1 + growthPerTick);
+        multiplier = multiplier * (1 + growthPerTick);
+        updateChart(multiplier);
         uiUpdate(); //update UI
+        growthPerTick += 0.01; //increase growth rate
 
         if (autoCashAmount > 0 && multiplier >= autoCashAmount) { //if auto cash-out is set and reached
             multiplier = autoCashAmount; //set multiplier to auto cash amount
@@ -71,7 +102,8 @@ function startGame() { //start game function
     gameActive = true; //set game as active
     GoonCoin -= betAmount; //Subtract bet amount initially
     updateBalance(); //Update balance display
-    multiplier = 0.00; //set multiplier to 0
+    multiplier = 1; //set multiplier to 0
+    growthPerTick=0.01; //Growth rate per tick
     crashPoint = Math.random() * 10; //random crash point between 0 and 10
     document.getElementById("result-message").innerText = ""; //clear result message
     document.getElementById("cashoutBtn").disabled = false; //enable cashout button
@@ -117,8 +149,9 @@ function resetGame() { //reset game function
         intervalId = null; //reset interval ID
     }
     gameActive = false; //set game as inactive
-    multiplier = 0.00; //reset multiplier
+    multiplier = 1; //reset multiplier
     crashPoint = 0; //reset crash point
+    growthPerTick=0.01; //Growth rate per tick
     document.getElementById("result-message").innerText = ""; //clear result message
     document.getElementById("cashoutBtn").disabled = true; //disable cashout button
     document.getElementById("startBtn").disabled = false; //enable start button
@@ -132,6 +165,7 @@ function setAutoCash() { //set auto cash-out amount
 
 //Page Elements
 window.addEventListener("DOMContentLoaded", () => { //on page load
+    initChart(); //initialize chart
     let balanceDisplay = document.getElementById("balance"); //get balance display element
     balanceDisplay.textContent = GoonCoin; //set initial balance display
     const startBtn = document.getElementById("startBtn"); //get start button element
@@ -148,3 +182,8 @@ window.addEventListener("DOMContentLoaded", () => { //on page load
     }
     uiUpdate(); //update UI
 });
+function resetChart() {
+    multiplierData.labels = [];
+    multiplierData.datasets[0].data = [];
+    multiplierChart.update();
+}
