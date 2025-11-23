@@ -78,7 +78,8 @@ function gacha_cost() {
     setTimeout( () => {
       gacha_message.innerHTML = "SPRINT Bank Theme Store";
     }, 4000)
-    //Remove GoonCoin Here
+    GoonCoin -= 500;
+    updateBalance();
     return true;
 
   //Unable to Complete Transaction
