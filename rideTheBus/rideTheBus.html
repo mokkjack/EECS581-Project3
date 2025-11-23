@@ -10,18 +10,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Ride The Bus</title>
   <link rel="stylesheet" href="rideTheBus.css">
+  <script src="../home_func.js"></script>
   <script src="rideTheBus.js" defer></script>
 </head>
 
 <body style="background-color: greenyellow;">
   <header>
-    <h1 style="text-align:center;">RIDE THE BUS MAIN PAGE</h1>
+    <h1 style="text-align:center;">RIDE THE BUS</h1>
   </header>
 
   <main style="text-align:center;">
-    <h2>
-      <img src="images/BUS.jpg" alt="Bus"><br>BUS
-    </h2>
+    <div id="progress-container">
+      <div id="progress-line"></div>
+        <img id="bus-icon" src="images/BUS.jpg" alt="Bus" />
+    </div>
 
     <div>
       <label for="betAmount">Buy-in ($): </label> <!--TODO MAKE CURRENCY TRACK AND GLOBAL TO OTHER GAMES-->

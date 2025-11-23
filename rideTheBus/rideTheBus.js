@@ -1,8 +1,19 @@
-/* 
-EECS 581: Group 21 Project 3
- The JavaScript Section for ride the bus
- of Codesino.
- */
+/* ======================================================================== *
+ * Prologue Comments for home_func.js                                       *
+ * File Name: home_func.js                                                  *
+ * Authors: Ian Foehrweiser                                                 *
+ * EECS 581: Group 21 Project 3                                             *
+ * ------------------------------------------------------------------------ *
+ * Code-sino Ride the bus game                                              *
+ * Inputs/Outputs                                                           *
+ *  Inputs:     Gooncoin from main page                                     *
+ *  Outputs:    Game graphics                                               *
+ *                                                                          *
+ *  Purpose:    Implement the ride the bus round based game                 *
+ *                                                                          *
+ *                                                                          *
+ *                                                                          *
+ * ======================================================================== */
 
 
 const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
@@ -53,13 +64,31 @@ function drawCard() {
 
 function startGame() {
   betAmount = parseFloat(document.getElementById("betAmount").value);
+
+  if (isNaN(betAmount) || betAmount <= 0) {
+    alert("Enter a valid bet amount.");
+    return;
+  }
+
+  if (betAmount > GoonCoin) {
+    alert("You don't have enough GoonCoin!");
+    return;
+  }
+
+  // Deduct bet
+  setGoonCoin(GoonCoin - betAmount);
+
   winnings = betAmount;
-  drawnCards = [];
   round = 1;
+  drawnCards = [];
+  document.getElementById('card-field-1').innerHTML = "";
+  updateBusPosition();
+  
   document.getElementById("result").textContent = "";
-  document.getElementById("card-field-1").innerHTML = "";
-  document.getElementById("instructions").textContent = "Round 1: Guess the color (Red or Black)";
+  document.getElementById("instructions").textContent =
+    "Round 1: Guess the color (Red or Black)";
   showButtons(["Red", "Black"]);
+  document.getElementById("startGame").hidden = true;
 }
 
 function showButtons(options) {
@@ -151,30 +180,61 @@ function nextRound(correct, nextText, nextOptions) {
   if (!correct) {
     instructionTag.textContent = "Wrong! You lost your bet.";
     document.getElementById("buttons").innerHTML = "";
+    document.getElementById("startGame").hidden = false;
     return;
   }
   round++;
+  updateBusPosition();
   instructionTag.textContent = nextText;
   showButtons(nextOptions);
 }
 
 function endGame(final = true, success = true) {
-  const resultTag = document.getElementById("result");
-  const buttonArea = document.getElementById("buttons");
-  buttonArea.innerHTML = "";
+  let payout = 0;
 
   if (final && success) {
-    resultTag.textContent = ` You won $${winnings.toFixed(2)}! Congratulations!`;
-  } else if (!final) {
-    resultTag.textContent = ` You exited early and took $${winnings.toFixed(2)}.`;
-  } else {
-    resultTag.textContent = ` You lost!`;
+    payout = Math.floor(winnings);
   }
+  else if (!final) {
+    payout = Math.floor(winnings * 0.75);
+  }
+
+  if (payout > 0) {
+    setGoonCoin(GoonCoin + payout);
+  }
+
+  document.getElementById("result").textContent =
+    payout > 0 ? `You won ${payout} GoonCoin!` : "You lost your bet.";
+
+  const buttons = document.getElementById("buttons");
+  buttons.innerHTML = "";
 
   const restartBtn = document.createElement("button");
   restartBtn.textContent = "Play Again";
   restartBtn.addEventListener("click", startGame);
-  buttonArea.appendChild(restartBtn);
+  buttons.appendChild(restartBtn);
+}
 
-  document.getElementById("instructions").textContent = "Game over — ready for another round?";
+function updateBusPosition() {
+  const bus = document.getElementById("bus-icon");
+
+  // Rounds go 1 → 4, so map that to 0% → 100%
+  const percentages = {
+    1: 0,
+    2: 33,
+    3: 66,
+    4: 100
+  };
+
+  bus.style.left = percentages[round] + "%";
+}
+
+function getGoonCoin() {
+    return GoonCoin; // uses the global from home_func.js
+}
+
+function setGoonCoin(amount) {
+    GoonCoin = amount;
+    saveGoonCoin();
+    updateCurrencyDisplay();
 }
