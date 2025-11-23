@@ -19,23 +19,88 @@
         <title> CODE-SINO HOMEPAGE </title> 
         <link rel="icon" type="image/x-icon" href="images/CODE-SINO_favicon.ico">
     </head>
-    <h1> EECS 581: Group 21 Project 3 Code-sino Homepage </h1> 
     <body onload="updateCurrencyDisplay()">
-        <!-- Select Game List -->
-        <p id="currency"> </p>
-        <div id="game_select">
-            <li><button id="baccarat" onclick="document.location='baccarat/baccarat.html'"> Baccarat </button> </li>
-            <li><button id="blackjack" onclick="document.location='blackjack/blackjack.html'"> Blackjack </button> </li>
-            <li><button id="crash" onclick="document.location='crash/crash.html'"> Crash </button> </li>
-            <li><button id="picture_poker" onclick="document.location='picture_poker/picture_poker.html'"> Picture Poker </button> </li>
-            <li><button id="ride_the_bus" onclick="document.location='rideTheBus/rideTheBus.html'"> Ride The Bus </button> </li>
-            <li><button id="bank_button" onclick="document.location='bank/bank.html'"> SPRINT Bank </button></li>
+        <div id="ascii-container">
+            <div id="ascii-track">
+                <pre>
+______    ______   _______   ________       ______   ______  __    __   ______  
+/      \  /      \ |       \ |        \     /      \ |      \|  \  |  \ /      \ 
+|  $$$$$$\|  $$$$$$\| $$$$$$$\| $$$$$$$$    |  $$$$$$\ \$$$$$$| $$\ | $$|  $$$$$$\
+| $$   \$$| $$  | $$| $$  | $$| $$__  ______| $$___\$$  | $$  | $$$\| $$| $$  | $$
+| $$      | $$  | $$| $$  | $$| $$  \|      \\$$    \   | $$  | $$$$\ $$| $$  | $$
+| $$   __ | $$  | $$| $$  | $$| $$$$$ \$$$$$$_\$$$$$$\  | $$  | $$\$$ $$| $$  | $$
+| $$__/  \| $$__/ $$| $$__/ $$| $$_____     |  \__| $$ _| $$_ | $$ \$$$$| $$__/ $$
+\$$    $$ \$$    $$| $$    $$| $$     \     \$$    $$|   $$ \| $$  \$$$ \$$    $$
+\$$$$$$   \$$$$$$  \$$$$$$$  \$$$$$$$$      \$$$$$$  \$$$$$$ \$$   \$$  \$$$$$$ 
+                </pre>
+                <pre>
+______    ______   _______   ________       ______   ______  __    __   ______  
+/      \  /      \ |       \ |        \     /      \ |      \|  \  |  \ /      \ 
+|  $$$$$$\|  $$$$$$\| $$$$$$$\| $$$$$$$$    |  $$$$$$\ \$$$$$$| $$\ | $$|  $$$$$$\
+| $$   \$$| $$  | $$| $$  | $$| $$__  ______| $$___\$$  | $$  | $$$\| $$| $$  | $$
+| $$      | $$  | $$| $$  | $$| $$  \|      \\$$    \   | $$  | $$$$\ $$| $$  | $$
+| $$   __ | $$  | $$| $$  | $$| $$$$$ \$$$$$$_\$$$$$$\  | $$  | $$\$$ $$| $$  | $$
+| $$__/  \| $$__/ $$| $$__/ $$| $$_____     |  \__| $$ _| $$_ | $$ \$$$$| $$__/ $$
+\$$    $$ \$$    $$| $$    $$| $$     \     \$$    $$|   $$ \| $$  \$$$ \$$    $$
+\$$$$$$   \$$$$$$  \$$$$$$$  \$$$$$$$$      \$$$$$$  \$$$$$$ \$$   \$$  \$$$$$$ 
+                </pre>
+                <pre>
+______    ______   _______   ________       ______   ______  __    __   ______  
+/      \  /      \ |       \ |        \     /      \ |      \|  \  |  \ /      \ 
+|  $$$$$$\|  $$$$$$\| $$$$$$$\| $$$$$$$$    |  $$$$$$\ \$$$$$$| $$\ | $$|  $$$$$$\
+| $$   \$$| $$  | $$| $$  | $$| $$__  ______| $$___\$$  | $$  | $$$\| $$| $$  | $$
+| $$      | $$  | $$| $$  | $$| $$  \|      \\$$    \   | $$  | $$$$\ $$| $$  | $$
+| $$   __ | $$  | $$| $$  | $$| $$$$$ \$$$$$$_\$$$$$$\  | $$  | $$\$$ $$| $$  | $$
+| $$__/  \| $$__/ $$| $$__/ $$| $$_____     |  \__| $$ _| $$_ | $$ \$$$$| $$__/ $$
+\$$    $$ \$$    $$| $$    $$| $$     \     \$$    $$|   $$ \| $$  \$$$ \$$    $$
+\$$$$$$   \$$$$$$  \$$$$$$$  \$$$$$$$$      \$$$$$$  \$$$$$$ \$$   \$$  \$$$$$$ 
+                </pre>
+                <pre>
+______    ______   _______   ________       ______   ______  __    __   ______  
+/      \  /      \ |       \ |        \     /      \ |      \|  \  |  \ /      \ 
+|  $$$$$$\|  $$$$$$\| $$$$$$$\| $$$$$$$$    |  $$$$$$\ \$$$$$$| $$\ | $$|  $$$$$$\
+| $$   \$$| $$  | $$| $$  | $$| $$__  ______| $$___\$$  | $$  | $$$\| $$| $$  | $$
+| $$      | $$  | $$| $$  | $$| $$  \|      \\$$    \   | $$  | $$$$\ $$| $$  | $$
+| $$   __ | $$  | $$| $$  | $$| $$$$$ \$$$$$$_\$$$$$$\  | $$  | $$\$$ $$| $$  | $$
+| $$__/  \| $$__/ $$| $$__/ $$| $$_____     |  \__| $$ _| $$_ | $$ \$$$$| $$__/ $$
+\$$    $$ \$$    $$| $$    $$| $$     \     \$$    $$|   $$ \| $$  \$$$ \$$    $$
+\$$$$$$   \$$$$$$  \$$$$$$$  \$$$$$$$$      \$$$$$$  \$$$$$$ \$$   \$$  \$$$$$$ 
+                </pre>
+                <pre>
+______    ______   _______   ________       ______   ______  __    __   ______  
+/      \  /      \ |       \ |        \     /      \ |      \|  \  |  \ /      \ 
+|  $$$$$$\|  $$$$$$\| $$$$$$$\| $$$$$$$$    |  $$$$$$\ \$$$$$$| $$\ | $$|  $$$$$$\
+| $$   \$$| $$  | $$| $$  | $$| $$__  ______| $$___\$$  | $$  | $$$\| $$| $$  | $$
+| $$      | $$  | $$| $$  | $$| $$  \|      \\$$    \   | $$  | $$$$\ $$| $$  | $$
+| $$   __ | $$  | $$| $$  | $$| $$$$$ \$$$$$$_\$$$$$$\  | $$  | $$\$$ $$| $$  | $$
+| $$__/  \| $$__/ $$| $$__/ $$| $$_____     |  \__| $$ _| $$_ | $$ \$$$$| $$__/ $$
+\$$    $$ \$$    $$| $$    $$| $$     \     \$$    $$|   $$ \| $$  \$$$ \$$    $$
+\$$$$$$   \$$$$$$  \$$$$$$$  \$$$$$$$$      \$$$$$$  \$$$$$$ \$$   \$$  \$$$$$$ 
+                </pre>
+            </div>
         </div>
-        <div id="cat">
-            <img id="omega" src="images/OmegaGamba.png" height="500px">
-            <p>
-            Its time to gamba my friends.
-            </p>
+        <!-- Select Game List -->
+        <div id="main-flex">
+            <div id="left-panel">
+                <div id="game_select">
+                    <h1>Select your game!</h1>
+                    <li><button id="baccarat" onclick="document.location='baccarat/baccarat.html'"> Baccarat </button> </li>
+                    <li><button id="blackjack" onclick="document.location='blackjack/blackjack.html'"> Blackjack </button> </li>
+                    <li><button id="crash" onclick="document.location='crash/crash.html'"> Crash </button> </li>
+                    <li><button id="picture_poker" onclick="document.location='picture_poker/picture_poker.html'"> Picture Poker </button> </li>
+                    <li><button id="ride_the_bus" onclick="document.location='rideTheBus/rideTheBus.html'"> Ride The Bus </button> </li>
+                </div>
+            </div>
+            <div id="right-panel">
+                <div id="gooncoin">
+                    <span>GoonCoin: </span><span id="currency"></span>
+                    <li><button id="bank_button" onclick="document.location='bank/bank.html'"> SPRINT Bank </button></li>
+                </div>
+                <div id="cat">
+                    <img id="omega" src="images/OmegaGamba.png" height="500px">
+                    <p>Its time to gamba my friends.</p>
+                </div>
+            </div>
         </div>
         
     </body>
