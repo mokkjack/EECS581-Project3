@@ -17,7 +17,7 @@ body {
 
 /*balence*/
 #balance-area {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin: 20px auto;
   font-weight: bold;
   background: rgba(0, 0, 0, 0.35);
@@ -110,14 +110,14 @@ body {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  background: gold;
-  color: black;
+  background: rgb(41, 40, 37);
+  color: rgb(255, 255, 255);
   font-weight: bold;
   transition: 0.2s ease;
 }
 
 #controls button:hover { /*button hover effect*/
-  background: rgb(255, 230, 90);
+  background: rgb(41, 40, 37);
   transform: scale(1.06);
 }
 
