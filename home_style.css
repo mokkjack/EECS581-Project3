@@ -76,48 +76,132 @@ body.theme-1 {
 }
 
 body.theme-2 {
-    background-color: #2f4f4f;
+    background-color: black;
     color: #ffffff;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        background-color: gray;
+        color: white;
+        border: 5px solid white;
+    }
 }
 
 body.theme-3 {
-    background-color: #fff0f5;
-    color: #000000;
+    background-color: black;
+    color: red;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        background-color: black;
+        color: red;
+        border: 5px solid red;
+    }
 }
 
 body.theme-4 {
-    background-color: #000000;
-    color: #00ff00;
+    background-color: black;
+    color: blue;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        background-color: black;
+        color: blue;
+        border: 5px solid blue;
+    }
 }
 
 body.theme-5 {
-    background-color: #51ff00;
-    color: #ffffff;
+    background-color: black;
+    color: #8B8000;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        background-color: black;
+        color: #8B8000;
+        border: 5px solid #8B8000;
+    }
 }
 
 body.theme-6 {
-    background-color: #ffe4e1;
-    color: #8b0000;
+    background-color: black;
+    color: #00ff00;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        background-color: black;
+        color: #00ff00;
+        border: 5px solid #00ff00;
+    }
 }
 
 body.theme-7 {
-    background-color: #f5f5dc;
-    color: #556b2f;
+    background-image: linear-gradient(to top, black, yellow, orange, pink, magenta, purple, darkviolet, black);
+    color: hotpink;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        background-color: #000000;
+        border: 5px solid transparent;
+        border-image: linear-gradient(to top right, hotpink, magenta, purple, darkviolet);
+        border-image-slice: 1;
+        color: violet;
+        font-family: fantasy;
+    }
 }
 
 body.theme-8 {
-    background-color: #e6e6fa;
-    color: #4b0082;
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    color: white;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        background-color: #302244;
+        color: white;
+        border: 5px solid transparent;
+        border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+        border-image-slice: 1;
+    }
 }
 
 body.theme-9 {
-    background-color: #f0fff0;
-    color: #006400;
+    background-image: linear-gradient(to right, #C0C0C0, white, #C0C0C0);
+    color: #8A9A9A;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        border: 5px solid gray;
+        background-image: linear-gradient(to right, #8A9A9A, white, #8A9A9A);
+    }
 }
 
 body.theme-10 {
-    background-color: #fffaf0;
-    color: #a0522d;
+    background-image: url(images/Special_Background.png);
+    background-size: cover;
+    color: greenyellow;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        border-top: 5px solid pink; border-left: 5px solid pink;
+        border-bottom: 5px solid violet; border-right: 5px solid violet;
+        background-image: linear-gradient(to right, darkviolet, darkorchid, white, darkorchid, darkviolet);    
+    }
+}
+
+body.theme-11 {
+    background-image: url(images/minesweeper_W.jpg);
+    background-size: cover;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        border-top: 5px solid white; border-left: 5px solid white;
+        border-bottom: 5px solid gray; border-right: 5px solid gray;
+        background-color: lightgray;
+        font-family: sans-serif;
+    }
+}
+
+body.theme-12 {
+    background-image: linear-gradient(to right, #D4AF37, white, #D4AF37);
+    color: #D4AF37;
+    font-family: "Lucida Handwriting", cursive, sans-serif;
+
+    #baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
+        border-top: 5px solid white; border-left: 5px solid white;
+        border-bottom: 5px solid darkgoldenrod; border-right: 5px solid darkgoldenrod;
+        background-image: linear-gradient(to right, #D4AF37, white, #D4AF37);
+        font-family: "Lucida Handwriting", cursive, sans-serif;
+    }
 }
 
 li {
@@ -125,45 +209,23 @@ li {
     padding: 5px;
 }
 
-#baccarat {
+#baccarat, #blackjack, #crash, #picture_poker, #ride_the_bus {
     width: 950px;
     height: 100px;
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-size: 40px;
+    cursor: pointer;
 }
 
-#blackjack {
-    width: 950px;
-    height: 100px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size: 40px;
-}
-
-#crash {
-    width: 950px;
-    height: 100px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size: 40px;
-}
-
-#picture_poker {
-    width: 950px;
-    height: 100px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size: 40px;
-}
-
-#ride_the_bus {
-    width: 950px;
-    height: 100px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    font-size: 40px;
-}
 #bank_button {
-    width: 950px;
+    width: 500px;
     height: 100px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-image: linear-gradient(to right, rgb(0, 162, 232), white, rgb(0, 162, 232));
+    font-family: sans-serif;
     font-size: 40px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
 }
 
 /* Main Flexbox Layout */

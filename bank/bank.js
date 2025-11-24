@@ -57,8 +57,8 @@ function bailout() {
  * 3  = Blue Theme                        *
  * 4  = Yellow Theme                      *
  * 5  = Green Theme                       *
- * 6  = Comic-Sans Theme                  *
- * 7  = Donkey Stare Theme                *
+ * 6  = Neon Theme                        *
+ * 7  = Rainbow Theme                     *
  * 8  = Silver Theme                      *
  * 9  = Special Theme                     *
  * 10 = Minesweeper Theme                 *
@@ -98,10 +98,41 @@ function random_number_generator() {
     return rng_value;
 }
 
+//Select Button Function
+function button_select(selected_value) {
+  //Clear Selected Class
+  let theme_buttons = gacha_theme_buttons.querySelectorAll('#Theme_Button');
+    theme_buttons.forEach(button => {
+      button.classList.remove('selected');
+  });
+
+  //Assign Selected Class
+  theme_buttons.forEach(button => {
+    if (button.value == selected_value) button.classList.add('selected');
+  });
+  return;
+}
+
+//Select Theme Function
+function theme_select(value) {
+  if (unlocked_themes[value - 1] == 1) {
+    //Clear & Select Theme Button
+    button_select(value);
+
+    current_theme = value;
+    console.log(`Theme has been changed to Theme ${value}.`);
+    saveCurrentTheme();
+
+  } else console.log("no");
+}
+
 //Unlock Checker Function
 function unlock_check(array_index) {
   if (unlocked_themes[array_index] === 1) {
-    console.log("duplicate");
+    gacha_message.innerHTML = "Duplicate Theme";
+    setTimeout( () => {
+      gacha_message.innerHTML = "SPRINT Bank Theme Store";
+    }, 3000)
     return;
   } else {
     unlocked_themes[array_index] = 1;
@@ -114,10 +145,12 @@ function unlock_check(array_index) {
         button.classList.add('unlocked');
       }
     });
+    gacha_message.innerHTML = "New Theme Unlocked!";
+    setTimeout( () => {
+      gacha_message.innerHTML = "SPRINT Bank Theme Store";
+    }, 3000)
 
     saveThemeArray();
-    console.log(unlocked_themes);
-    console.log("you won!");
   }
 
 }
@@ -193,6 +226,9 @@ function gacha() {
 
   //Gacha Transaction Check
   if (gacha_cost()) {
+    //Temporarily Disable Gacha Button
+    gacha_button.disabled = true;
+
     //Gacha Button Color Change
     for (let i = 0; i < 10; i++) {
       let delay = i * 500;
@@ -216,7 +252,8 @@ function gacha() {
 
     setTimeout( () => {
       gacha_remove_color();
-    }, final_delay + 5000);
+      gacha_button.disabled = false; //Re-enable Gacha Button
+    }, final_delay + 2500);
     return;
 
   } else {
@@ -236,6 +273,10 @@ function onload_theme_unlocker() {
       if (button.value == i + 1) {
         button.classList.remove('locked');
         button.classList.add('unlocked');
+      }
+      //Mark Selected Button
+      if (button.value == current_theme) {
+        button.classList.add('selected')
       }
       });
     }
