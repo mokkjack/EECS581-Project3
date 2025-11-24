@@ -122,6 +122,10 @@ function startGame() { //start game function
     const betInput = document.getElementById("bet"); //get bet input element
     const autoCashInput = document.getElementById("autoCashInput"); //get auto cash input element
     betAmount = parseInt(betInput.value); //get bet amount as integer
+    if (betAmount > GoonCoin){ //check if bet amount exceeds balance
+        alert("Insufficient GoonCoin for this bet!");
+        return;
+    }
     autoCashAmount = parseFloat(autoCashInput.value) || 0; //get auto cash amount or 0 if invalid
     gameActive = true; //set game as active
     GoonCoin -= betAmount; //Subtract bet amount initially
