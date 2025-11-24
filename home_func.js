@@ -21,6 +21,7 @@ var bailouttime = parseInt(sessionStorage.getItem("bailouttime")) || 0;
 //a global array for unlocked themes
 var unlocked_themes_raw = sessionStorage.getItem("unlocked_themes");
 var unlocked_themes = JSON.parse(unlocked_themes_raw) || [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1 = UNLOCKED | 0 = LOCKED
+var current_theme = parseInt(sessionStorage.getItem("current_theme")) || 1;
 
 // Global GoonCoin
 var GoonCoin = sessionStorage.getItem("GoonCoin");
@@ -52,6 +53,11 @@ function saveBailoutTime() {
 // Save unlocked_themes to sessionStorage
 function saveThemeArray() {
     sessionStorage.setItem("unlocked_themes", JSON.stringify(unlocked_themes));
+}
+
+// Save current_theme to sessionStorage
+function saveCurrentTheme() {
+    sessionStorage.setItem("current_theme", current_theme);
 }
 
 // Bailout function
@@ -86,6 +92,25 @@ function updateCurrencyDisplay() {
     }
 }
 
+// Clear Class Attributes
+function clear_class() {
+    document.body.className = '';
+    return;
+}
+
+// Update Theme Display
+function load_theme() {
+    let current_class = `theme-${current_theme}`;
+    clear_class();
+    document.body.classList.add(current_class);
+}
+
+// Homepage Onload Function
+function onload_start() {
+    updateCurrencyDisplay();
+    load_theme();
+}
+
 
 /* ======================================================================== *
  * Window Onload Function                                                   *
@@ -93,10 +118,10 @@ function updateCurrencyDisplay() {
 
 // Called on initial load
 window.addEventListener("load", () => {
-    updateCurrencyDisplay();
+    onload_start();
 });
 
 // Also update when page is shown from bfcache (back button)
 window.addEventListener("pageshow", () => {
-    updateCurrencyDisplay();
+    onload_start();
 });
