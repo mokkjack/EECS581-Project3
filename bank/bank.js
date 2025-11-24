@@ -222,7 +222,7 @@ function gacha_add_colors(number) {
  * ================ */
 function gacha() {
   //Local Variable
-  let final_delay = 5500; 
+  let final_delay = 3200; 
 
   //Gacha Transaction Check
   if (gacha_cost()) {
@@ -231,7 +231,7 @@ function gacha() {
 
     //Gacha Button Color Change
     for (let i = 0; i < 10; i++) {
-      let delay = i * 500;
+      let delay = i * 300;
       
       setTimeout( () => {
         let rng_value = random_number_generator();
@@ -240,7 +240,7 @@ function gacha() {
 
       setTimeout( () => {
         gacha_remove_color();
-      }, delay + 400);
+      }, delay + 200);
     }
 
     //Gacha Reward
@@ -253,7 +253,7 @@ function gacha() {
     setTimeout( () => {
       gacha_remove_color();
       gacha_button.disabled = false; //Re-enable Gacha Button
-    }, final_delay + 2500);
+    }, final_delay + 1500);
     return;
 
   } else {
