@@ -5,27 +5,65 @@
  * of Codesino.
  */
 
+body {
+  background-color: #006400;
+  color: white;
+}
+
  h1 {
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 30px;
+    font-family: fantasy;
+    font-size: 5px;
  }
 
- #top {
+ #guide-table {
+  width: auto;
+  height: 450px;
+  float: left;
+
+  margin-left: 10px;
+  margin-top: 5px;
+
+  border: 7px solid black;
+  border-radius: 25px;
+ }
+
+ #balance-area {
+  margin-left: 20px;
+  font-size: 20px;
+ }
+
+ #top, #bottom, #user_bar {
    text-align: center;
+   padding-right: 200px;
  }
 
- #bottom {
-   text-align: center;
- }
+ #increment {
+  background-image: linear-gradient(to right, #D4AF37, yellow, #D4AF37);
+  border: 3px solid darkgreen;
 
- #user_bar {
-  text-align: center;
+  font-family: fantasy;
+  font-size: 10px;
+  color: darkgreen;
+
+  height: 30px;
+  width: 100px;
+
+  cursor: pointer;
  }
 
  #discard_button {
+  background-image: linear-gradient(to right, #D4AF37, yellow, #D4AF37);
+  border: 3px solid darkgreen;
+  border-radius: 25px;
+
+  font-family: fantasy;
+  font-size: 25px;
+  color: darkgreen;
+
   width: 500px;
   height: 50px;
+  cursor: pointer;
  }
 
  #back {
@@ -34,7 +72,17 @@
   height: 75px;
   bottom: 20px;
   left: 20px;
+
+  background-image: linear-gradient(to right, #D4AF37, yellow, #D4AF37);
+  border: 3px solid darkgreen;
+  border-radius: 25px;
+
+  font-family: fantasy;
+  font-size: 25px;
+  color: darkgreen;
  }
+
+
 
 /* Card Designs
  * CSS Styling for All Rank Cards
