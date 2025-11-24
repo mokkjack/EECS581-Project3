@@ -8,14 +8,35 @@
  h1 {
     text-align: center;
     color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: "fira-code", monospace;
     font-size: 30px;
  }
-
-  body {
+h2 {
+    text-align: center;
+    color: white;
+    font-family: "fira-code", monospace;
+    font-size: 25px;
+}
+#bet-area {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    margin-top: 20px;
+}
+#graph-area {
+    text-align: center;
+    margin-top: 20px;
+}
+#multiplier {
+    font-size: 40px;
+    font-family: "fira-code", monospace;
+    color:greenyellow;
+    font-weight: bold;
+}
+body {
     color: white;
     background-color: black;
-  }
+}
  #top {
    position: fixed;
    top: 0;

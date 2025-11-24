@@ -14,8 +14,8 @@ let autoCashAmount = 0; //Auto cash-out number
 let intervalId = null; //Interval ID for game loop
 let betAmount = 0; //User bet amount
 let growthPerTick=0.01; //Growth rate per tick
-let multiplierChart;
-let multiplierData = {
+let multiplierChart; //Chart.js instance for multiplier chart
+let multiplierData = { //Data for multiplier chart
     labels: [],
     datasets: [{
         data: [],
@@ -24,26 +24,48 @@ let multiplierData = {
         tension: 0.1
     }]
 };
-function initChart() {
+
+function initChart() { //create the chart
     const ctx = document.getElementById('multiplierChart').getContext('2d');
-    multiplierChart = new Chart(ctx, {
+    multiplierChart = new Chart(ctx, { //chart settings
         type: 'line',
         data: multiplierData,
         options: {
             animation: true,
+            plugins: {
+                legend: {
+                    display: false // Hide the legend
+                }
+            },
             scales: {
-                x: { title: { display: true, text: 'Time' } },
-                y: { title: { display: true, text: 'Multiplier' }, min: 1 }
+                x: { 
+                    title: 
+                    { 
+                        display: true, 
+                        text: 'Time' 
+                    },
+                    beginAtZero: true
+                },
+                y: { 
+                    title: 
+                    { 
+                        display: true, 
+                        text: 'Multiplier' 
+                    }, 
+                    min: 1 
+                }
             }
         }
     });
 }
-function updateChart(multiplier) {
+
+function updateChart(multiplier) { //update chart with new multiplier value
     multiplierData.labels.push(multiplierData.labels.length);
     multiplierData.datasets[0].data.push(multiplier);
     multiplierChart.update();
 }
- //UI Elements
+
+//UI Elements
 function updateBalance() { //Update balance display
   document.getElementById("balance").textContent = GoonCoin; //Update balance display
   saveGoonCoin(); //Save updated balance
@@ -57,7 +79,7 @@ function uiUpdate() { //Update UI elements
 //Game Elements
 function startLoop() { //Start game loop
     const tickMs = 100; // tick interval in milliseconds
-    const growthPerTick = 0.01; // multiplicative growth
+    growthPerTick = 0.01; // multiplicative growth
 
     if (intervalId) { // Clear existing interval if any
         clearInterval(intervalId);
@@ -75,7 +97,7 @@ function startLoop() { //Start game loop
         multiplier = multiplier * (1 + growthPerTick);
         updateChart(multiplier);
         uiUpdate(); //update UI
-        growthPerTick += 0.01; //increase growth rate
+        // growthPerTick += 0.01; //increase growth rate
 
         if (autoCashAmount > 0 && multiplier >= autoCashAmount) { //if auto cash-out is set and reached
             multiplier = autoCashAmount; //set multiplier to auto cash amount
@@ -85,6 +107,7 @@ function startLoop() { //Start game loop
         }
 
         if (multiplier >= crashPoint) { //if the multiplier reaches the crash point before cashing out
+            console.log("yep");
             crashOut(); //crash out
             return; //exit function
         }
@@ -95,6 +118,7 @@ function startGame() { //start game function
     if (gameActive){ //prevent starting a new game if one is already active
         return;
     }
+    resetChart(); //reset chart datare
     const betInput = document.getElementById("bet"); //get bet input element
     const autoCashInput = document.getElementById("autoCashInput"); //get auto cash input element
     betAmount = parseInt(betInput.value); //get bet amount as integer
@@ -102,9 +126,10 @@ function startGame() { //start game function
     gameActive = true; //set game as active
     GoonCoin -= betAmount; //Subtract bet amount initially
     updateBalance(); //Update balance display
-    multiplier = 1; //set multiplier to 0
+    multiplier = 1; //set multiplier to 1
     growthPerTick=0.01; //Growth rate per tick
     crashPoint = Math.random() * 10; //random crash point between 0 and 10
+    console.log("Crash Point set at: " + crashPoint.toFixed(2) + "x"); //log crash point for testing
     document.getElementById("result-message").innerText = ""; //clear result message
     document.getElementById("cashoutBtn").disabled = false; //enable cashout button
     document.getElementById("startBtn").disabled = true; //disable start button
@@ -119,6 +144,8 @@ function crashOut() { //crash out function
         clearInterval(intervalId); //clear interval
         intervalId = null; //reset interval ID
     }
+    document.getElementById("result-message").style.color = "red"; //set crash message color to red
+    document.getElementById("result-message").style.fontSize = "80px"; //increase multiplier font size on crash
     document.getElementById("result-message").innerText = "CRASHED at " + multiplier.toFixed(2) + "x"; //display crash message
     document.getElementById("cashoutBtn").disabled = true; //disable cashout button
     document.getElementById("startBtn").disabled = false; //enable start button
@@ -135,6 +162,7 @@ function cashOut() { //cash out function
         clearInterval(intervalId); //clear interval
         intervalId = null; //reset interval ID
     }
+    document.getElementById("result-message").style.color = "greenyellow"; //set payout message color to greenyellow
     const payoutText = "Cashed out at " + multiplier.toFixed(2) + "x"; //create payout message
     document.getElementById("result-message").innerText = payoutText; //display payout message
     document.getElementById("cashoutBtn").disabled = true; //disable cashout button
@@ -148,6 +176,7 @@ function resetGame() { //reset game function
         clearInterval(intervalId); //clear interval
         intervalId = null; //reset interval ID
     }
+    resetChart(); //reset chart data
     gameActive = false; //set game as inactive
     multiplier = 1; //reset multiplier
     crashPoint = 0; //reset crash point
@@ -162,6 +191,7 @@ function setAutoCash() { //set auto cash-out amount
     const input = document.getElementById("autoCashInput"); //get auto cash input element
     autoCashAmount = parseFloat(input.value) || 0; //set auto cash amount or 0 if invalid
 }
+
 
 //Page Elements
 window.addEventListener("DOMContentLoaded", () => { //on page load
@@ -182,7 +212,8 @@ window.addEventListener("DOMContentLoaded", () => { //on page load
     }
     uiUpdate(); //update UI
 });
-function resetChart() {
+
+function resetChart() { //reset chart data
     multiplierData.labels = [];
     multiplierData.datasets[0].data = [];
     multiplierChart.update();
