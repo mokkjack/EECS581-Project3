@@ -535,18 +535,28 @@ function continue_turn() {
 
 //Turn (Discard Card) Function
 function discard() { //start_turn Function
-    let selected_cards = document.querySelectorAll(".selected");
-    selected_cards.forEach(card => {
-        card.remove();
-        THIS_HAND_COUNT--;
-    })
+    if (currency_check()) {
+        let selected_cards = document.querySelectorAll(".selected");
+        selected_cards.forEach(card => {
+            card.remove();
+            THIS_HAND_COUNT--;
+        })
 
-    remove_event_listener(); //FIX THIS
-    DISCARD_BUTTON.disabled = true;   
+        remove_event_listener(); //FIX THIS
+        DISCARD_BUTTON.disabled = true;   
 
-    draw_cards(deck, THIS_HAND);
-    continue_turn();
+        draw_cards(deck, THIS_HAND);
+        continue_turn();
+    } else {
+        alert(`You must have at least \n\t$${BET_AMOUNT}\nin order to play Picture Poker!`);
+    }
     return;
+}
+
+//Valid Currency Function
+function currency_check() {
+    if (GoonCoin - BET_AMOUNT < 0) return false;
+    else return true;
 }
 
 //Start Function
