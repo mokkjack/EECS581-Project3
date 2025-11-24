@@ -13,5 +13,4 @@ This project will contain the following casino games that will be playable on yo
 * Picture Poker
 * Ride the Bus
 
-A main menu will allow you to select one of the listed games above to play!  
-(MORE HERE)  
+With each game, you can use the money gained to buy themes and customize your home page!
