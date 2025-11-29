@@ -30,19 +30,25 @@
         <div id="balance-area">
             Balance: $<span id="balance">0</span> |
             Bet: $<span id="bet_amt"></span>
-            <button id="increment"> Increment </button>
+            <button id="increment" onclick="increment()"> Bet! </button>
         </div>
         <div id="help-area"> <img id="guide-table" src="../images/picture_poker_cards/Guide_Table.png"> </div>
         <!-- Hand Location -->
-        <div id="top"> </div>
-        <div id="bottom"> </div>
+        <div id="Game_Section">
+            <div id="top"> </div>
+            <div id="display"><p id="P2-Section"> </p> </div>
+            <div id="display"><p id="win_display"> </p> </div>
+            <div id="display"><p id="P1-Section"> </p> </div>
+            <div id="bottom"> </div>
 
-        <div id="user_bar"> 
-            <button id="discard_button" onclick="discard()"> Discard </button>
+            <div id="user_bar"> 
+                <button id="discard_button" onclick="discard()"> Discard </button>
+            </div>
         </div>
+
+        <!-- Return Section -->
         <div id="return">
             <button id="back" onclick="document.location='../default.html'">Back</button>
-            <p id="win_display"></p>
         </div>
     </body>
 

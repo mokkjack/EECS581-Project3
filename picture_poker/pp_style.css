@@ -35,16 +35,29 @@ body {
 
  #top, #bottom, #user_bar {
    text-align: center;
-   padding-right: 200px;
+ }
+
+ #display {
+   text-align: center;
+ }
+
+ #Game_Section {
+  right: 20px;
+ }
+
+ #win_display {
+  font-size: 30px;
  }
 
  #increment {
-  background-image: linear-gradient(to right, #D4AF37, yellow, #D4AF37);
-  border: 3px solid darkgreen;
+  background-image: linear-gradient(to top, #D4AF37, yellow, #D4AF37);
+  border: 1px solid black;
 
   font-family: fantasy;
-  font-size: 10px;
-  color: darkgreen;
+  font-size: 20px;
+  color: orange;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 
   height: 30px;
   width: 100px;
@@ -53,13 +66,17 @@ body {
  }
 
  #discard_button {
-  background-image: linear-gradient(to right, #D4AF37, yellow, #D4AF37);
-  border: 3px solid darkgreen;
+  text-align: center;
+
+  background-image: linear-gradient(to top, #D4AF37, yellow, white);
+  border: 1px solid black;
   border-radius: 25px;
 
   font-family: fantasy;
-  font-size: 25px;
-  color: darkgreen;
+  font-size: 30px;
+  color: yellowgreen;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 
   width: 500px;
   height: 50px;
@@ -73,13 +90,15 @@ body {
   bottom: 20px;
   left: 20px;
 
-  background-image: linear-gradient(to right, #D4AF37, yellow, #D4AF37);
-  border: 3px solid darkgreen;
+  background-image: linear-gradient(to top, #D4AF37, yellow, white);
+  border: 1px solid black;
   border-radius: 25px;
 
   font-family: fantasy;
   font-size: 25px;
-  color: darkgreen;
+  color: yellowgreen;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
  }
 
 

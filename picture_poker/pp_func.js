@@ -26,6 +26,11 @@ var deck;
 const ranks = ['S_CARD', 'A_CARD', 'B_CARD', 'C_CARD', 'D_CARD', 'F_CARD'];
 const hands = ['FIVE_OF_A_KIND', 'FOUR_OF_A_KIND', 'FULL_HOUSE', 'THREE_OF_A_KIND', 'TWO_PAIR', 'PAIR', 'HIGH_CARD'];
 
+//Text Variables
+const P1_DISPLAY = document.getElementById('P1-Section');
+const P2_DISPLAY = document.getElementById('P2-Section');
+const WIN_DISPLAY = document.getElementById('win_display');
+
 //Button Variables
 const DISCARD_BUTTON = document.getElementById('discard_button');
 
@@ -316,15 +321,16 @@ function check_hand(container_name) {
 
 //Compare Second Hand Function
 function compare_second_hand(array_data) {
-    let = second_pair_rank = -1;
-    for (let i = array_data.size - 1; i >= 0; i--) {
+    let second_pair_rank = -1;
+
+    for (let i = array_data.length - 1; i >= 0; i--) {
         if (array_data[i] == 2) {
             second_pair_rank = i;
-            break;
+            console.log(second_pair_rank); //Bug Test Line
+            return second_pair_rank;
         }
     }
-    console.log(second_pair_rank);
-    return second_pair_rank;
+    return -1;
 }
 
 
@@ -333,8 +339,12 @@ function compare_second_hand(array_data) {
  * Sort Function                                *
  * ============================================ */
 
-//Array Move Back Function
-function array_move_back_one(array) {}
+//ReQueue Function
+function requeue(array) {
+    let entry = array.shift();
+    array.push(entry);
+    return array;
+}
 
 //Sort Function
 function sort() {
@@ -360,6 +370,11 @@ function sort() {
         })
     }
 
+    //Sort by Hand (THIS_HAND)
+    if (data_THIS[1] == ranks[1]) {
+
+    }
+
     //Redistribute Sorted Hand (THIS_HAND)
     clear(THIS_HAND);
     for (let i = 0; i < 5; i++) {
@@ -373,9 +388,6 @@ function sort() {
         sorted_OTHER_HAND.forEach(card => OTHER_HAND.appendChild(card));
         OTHER_HAND_COUNT++;
     }
-
-    console.log(sorted_THIS_HAND);
-
 }
 
 
@@ -414,6 +426,15 @@ function new_round() {
     //Clear Board
     clear(THIS_HAND);
     clear(OTHER_HAND);
+
+    //Reset Bet Amount
+    BET_AMOUNT = 100;
+    load_bet();
+
+    //Reset Display
+    P1_DISPLAY.textContent = '';
+    P2_DISPLAY.textContent = '';
+    WIN_DISPLAY.textContent = '';
 
     distribute();
     DISCARD_BUTTON.disabled = false;
@@ -498,8 +519,6 @@ function finish_turn() {
     }
 
     new_round();
-    console.log(deck.size());
-    
 }
 
 //Turn (Dealer Plays & Hands Comparision & Currency Distributed) Function
@@ -516,19 +535,30 @@ function continue_turn() {
     //Sort Hands
     sort();
 
+    //Show Hands
+    P1_DISPLAY.textContent = `${this_data[1]}`;
+    P2_DISPLAY.textContent = `${other_data[1]}`;
+
     //Show Results
     unhide_cards();
     var GAME_RESULT = compare_hands(this_data, other_data); //GAME_RESULT -> WIN | LOSE | DRAW
 
     if (GAME_RESULT == 'WIN') {
+        WIN_DISPLAY.textContent = 'You Win!';
         GoonCoin += BET_AMOUNT;
         updateBalance();
-        console.log("winner");
+        console.log("Win");
+
     } else if (GAME_RESULT == 'LOSE') {
+        WIN_DISPLAY.textContent = 'You Lose!';
         GoonCoin -= BET_AMOUNT;
         updateBalance();
-        console.log("loser");
-    } else console.log("draw");    
+        console.log("Lose");
+
+    } else {
+        WIN_DISPLAY.textContent = 'Draw!';
+        console.log("Draw");
+    }    
 
     setTimeout(finish_turn, 3000); //3 Second Delay
 }
@@ -561,13 +591,31 @@ function currency_check() {
 
 //Start Function
 function start() {
+    load_bet();
     deck = load_cards();
     distribute();
 }
 
+
+
 /* ============================================ *
  * Picture Poker Currency Functions             *
  * ============================================ */
+
+//Increment Function
+function increment() {
+    if (GoonCoin - (BET_AMOUNT + 100) >= 0) {
+        BET_AMOUNT += 100;
+        load_bet();
+    } else alert(`You are unable to increment bet amount to $${BET_AMOUNT + 100}!\nIncrements are in hundreds.`);
+    return;
+}
+
+//Set Bet Amount Function
+function load_bet() {
+    let betDisplay = document.getElementById("bet_amt");
+    betDisplay.textContent = BET_AMOUNT;
+}
 
 //Update Currency Function
 function updateBalance() { 
