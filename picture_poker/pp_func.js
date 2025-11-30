@@ -339,11 +339,16 @@ function compare_second_hand(array_data) {
  * Sort Function                                *
  * ============================================ */
 
-//ReQueue Function
-function requeue(array) {
-    let entry = array.shift();
-    array.push(entry);
-    return array;
+//Redistribute Function
+function redistribute(container_name, container_name_array) {
+    console.log(container_name_array);
+    clear(container_name);
+    for (let i = 0; i < 5; i++) {
+        container_name_array.forEach(card => container_name.appendChild(card));
+        if (container_name == 'THIS_HAND') THIS_HAND_COUNT++;
+        else OTHER_HAND_COUNT++;
+    }
+    return;
 }
 
 //Sort Function
@@ -354,40 +359,69 @@ function sort() {
     let data_THIS = check_hand(THIS_HAND);
     let data_OTHER = check_hand(OTHER_HAND);
 
-    //Sort by Rank (THIS_HAND)
-    for (let i = 0; i < 6; i++) {
-        let cards = THIS_HAND.querySelectorAll(`#${ranks[i]}`);
-        cards.forEach(card => {
-            sorted_THIS_HAND.push(card);
-        })
-    }
-
-    //Sort by Rank (OTHER_HAND)
-    for (let i = 0; i < 6; i++) {
-        let cards = OTHER_HAND.querySelectorAll(`#${ranks[i]}`);
-        cards.forEach(card => {
-            sorted_OTHER_HAND.push(card);
-        })
-    }
-
     //Sort by Hand (THIS_HAND)
-    if (data_THIS[1] == ranks[1]) {
-
+    let count_array = [];
+    for (let i = 0; i < 6; i++) {
+        let count = data_THIS[0][i];
+        if (count != 0) count_array.push(count);
     }
 
-    //Redistribute Sorted Hand (THIS_HAND)
-    clear(THIS_HAND);
-    for (let i = 0; i < 5; i++) {
-        sorted_THIS_HAND.forEach(card => THIS_HAND.appendChild(card));
-        THIS_HAND_COUNT++;
+    //Sort Descending Order (THIS_HAND)
+    count_array.sort(function(a, b) {
+        return b - a;
+    });
+
+    //Set Creation
+    const sorted_set = new Set(count_array);
+
+    //Sort by Number
+    sorted_set.forEach(number => {
+        for (let i = 0; i < 6; i++) {
+            if (data_THIS[0][i] == number) {
+
+                //Sort by Rank
+                let cards = THIS_HAND.querySelectorAll(`#${ranks[i]}`);
+                cards.forEach(card => {
+                    sorted_THIS_HAND.push(card);
+                });
+            }
+        }
+    });
+
+    //Sort by Hand (OTHER_HAND)
+    let count_array_two = [];
+    for (let i = 0; i < 6; i++) {
+        let count = data_OTHER[0][i];
+        if (count != 0) count_array_two.push(count);
     }
 
-    //Redistribute Sorted Hand (OTHER_HAND)
-    clear(OTHER_HAND);
-    for (let i = 0; i < 5; i++) {
-        sorted_OTHER_HAND.forEach(card => OTHER_HAND.appendChild(card));
-        OTHER_HAND_COUNT++;
-    }
+    //Sort Descending Order (OTHER_HAND)
+    count_array_two.sort(function(a, b) {
+        return b - a;
+    });
+
+    //Set Creation
+    const sorted_set_two = new Set(count_array_two);
+
+    //Sort by Number
+    sorted_set_two.forEach(number => {
+        for (let i = 0; i < 6; i++) {
+            if (data_OTHER[0][i] == number) {
+
+                //Sort by Rank
+                let cards = OTHER_HAND.querySelectorAll(`#${ranks[i]}`);
+                cards.forEach(card => {
+                    sorted_OTHER_HAND.push(card);
+                });
+            }
+        }
+    });
+    
+    //Redistribute Sorted Hand
+    redistribute(THIS_HAND, sorted_THIS_HAND);
+    redistribute(OTHER_HAND, sorted_OTHER_HAND);
+
+    return;
 }
 
 

@@ -1,9 +1,15 @@
-/* crashstyle.css */
-
-/* EECS 581: Group 21 Project 3
- * The CSS Styling Section for crash
- * in Codesino.
- */
+/* ======================================================================== *
+ * Prologue Comments for crashstyle.css                                     *
+ * File Name: crashstyle.css                                                *
+ * Authors: Jack Morice                                                     *
+ * EECS 581: Group 21 Project 3                                             *
+ * ------------------------------------------------------------------------ *
+ * Code-sino Crash Style                                                    *
+ * Inputs/Outputs                                                           *
+ *  Inputs:     None                                                        *
+ *  Outputs:    Website Design                                              *
+ * Purpose: The CSS Styling Section for crash in Codesino                   *
+ * ======================================================================== */
 
  h1 {
     text-align: center;

@@ -1,6 +1,6 @@
 /* ======================================================================== *
- * Prologue Comments for home_func.js                                       *
- * File Name: home_func.js                                                  *
+ * Prologue Comments for rideTheBus.js                                      *
+ * File Name: rideTheBus.js                                                 *
  * Authors: Ian Foehrweiser                                                 *
  * EECS 581: Group 21 Project 3                                             *
  * ------------------------------------------------------------------------ *

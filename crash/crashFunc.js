@@ -1,10 +1,16 @@
-//crashFunc.js
-// Created by Jack Morice
-// EECS 581: Group 21 Project 3
-// Crash Game Logic
-// Inputs/Outputs
-//  Inputs: User Bet Amount, Start Game Button, Cash Out Button, Reset Button
-//  Outputs: Change in Balance
+/* ======================================================================== *
+ * Prologue Comments for crashFunc.js                                       *
+ * File Name: crashFunc.js                                                  *
+ * Authors: Jack Morice                                                     *
+ * EECS 581: Group 21 Project 3                                             *
+ * ------------------------------------------------------------------------ *
+ * Code-sino Crash Game Logic                                               *
+ * Inputs/Outputs                                                           *
+ *  Inputs:     User Bet Amount, Start Game Button, Cash Out Button,        *
+ *              Reset Button                                                *
+ *  Outputs:    Change in Balance                                           *
+ * Purpose:    The JavaScript Section for crash of Codesino                 *
+ * ======================================================================== */
 
 //Global Variables
 let multiplier = 1; //Multiplier amount starting at 0

@@ -1,14 +1,23 @@
-/*
-Prologue comment:
-File Name: Blackjack logic
-EECS 581 Project 3
-Author: Zhang Chen 
-Purpose: This file provide the logic for a casino game named blackjack.
-The game logic is break up into multiple function to be modular, added feature and easy to maintain later on
-Input: User(player) can enter the bet amount, click on the following button based on meeted condition:"deal", "hit", "stand", "double", and "reset"
-Output: Shows if the player win, lose, or tie. Based on those three condition, player's currency may reduce, add, or stay netural
+/* ======================================================================== *
+ * Prologue Comments for Blackjackfunc.js                                   *
+ * File Name: Blackjackfunc.js                                              *
+ * Authors: Zhang Chen                                                      *
+ * EECS 581: Group 21 Project 3                                             *
+ * ------------------------------------------------------------------------ *
+ * Code-sino Blackjack Function                                             *
+ * Inputs/Outputs                                                           *
+ *  Inputs:     User(player) can enter the bet amount, click on the         *
+ *              following button based on meeted condition:"deal", "hit",   *
+ *              "stand", "double", and "reset"                              *
+ *  Outputs:    Shows if the player win, lose, or tie. Based on those three * 
+ *              condition, player's currency may reduce, add, or stay       *
+ *              netural                                                     *
+ * Purpose:    This file provide the logic for a casino game named          *
+ *             blackjack.                                                   *
+ *             The game logic is break up into multiple function to be      *
+ *             modular, added feature and easy to maintain later on         *
+ * ======================================================================== */
 
-*/
 //Global currency
 document.addEventListener("DOMContentLoaded", () => {
   //local variable to get the golbal curreny in home_func.js

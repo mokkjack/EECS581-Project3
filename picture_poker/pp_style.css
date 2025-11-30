@@ -1,10 +1,16 @@
-/* pp_style.css */
-
-/* EECS 581: Group 21 Project 3
- * The CSS Styling Section for Picture Poker
- * of Codesino.
- */
-
+/* ======================================================================== *
+ * Prologue Comments for pp_style.css                                       *
+ * File Name: pp_style.css                                                  *
+ * Authors: Evan Zhuo                                                       *
+ * EECS 581: Group 21 Project 3                                             *
+ * ------------------------------------------------------------------------ *
+ * Code-sino Picture Poker Style                                            *
+ * Inputs/Outputs                                                           *
+ *  Inputs:     None                                                        *
+ *  Outputs:    Website Design                                              *
+ * Purpose: The CSS styling section for Picture Poker of Codesino           *
+ * ======================================================================== */
+ 
 body {
   background-color: #006400;
   color: white;

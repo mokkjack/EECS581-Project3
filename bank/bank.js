@@ -1,13 +1,13 @@
 /* ======================================================================== *
  * Prologue Comments for bank.js                                            *
  * File Name: bank.js                                                       *
- * Authors: 
+ * Authors: Jack Morice, Evan Zhuo                                          *
  * EECS 581: Group 21 Project 3                                             *
  * ------------------------------------------------------------------------ *
  * Code-sino Bank Function                                                  *
  * Inputs/Outputs                                                           *
- *  Inputs:     Bailout Button                                              *
- *  Outputs:    Currency Reset | Bailout Incrementation                     *
+ *  Inputs:     Bailout Button, Theme Buttons                               *
+ *  Outputs:    Currency Reset | Bailout Incrementation | Theme Change      *
  * ======================================================================== */
 
 //Global Variables
