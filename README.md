@@ -13,22 +13,22 @@ Code-sino is a website that features the following games:
 * Picture Poker
 * Ride the Bus
 
-The functionality of this project is entertainment.
-Code-sino contains a global currency that is shared among the five games
-and "SPRINT Bank".
-SPRINT Bank is an attached website to Code-sino.
-Code-sino works best on Google Chrome.
+The functionality of this project is entertainment. <br>
+Code-sino contains a global currency that is shared among the five games <br>
+and "SPRINT Bank". <br>
+SPRINT Bank is an attached website to Code-sino. <br>
+Code-sino works best on Google Chrome. <br>
 
 ------- + ------- + ------- + ------- + ------- + ------- <br>
     SPRINT Bank "Make More of What's Yours" <br>
 ------- + ------- + ------- + ------- + ------- + ------- <br>
-SPRINT Bank displays the account balance
-SPRINT Bank offers a bail-out service for accounts with a balance of zero.
-SPRINT Bank has a Theme Shop that unlocks themes based on chance.
-There are eleven themes to unlock. The cost to unlock a theme is
-$500.00.
-Themes from SPRINT Bank will update only the main menu page of
-Code-sino.
+SPRINT Bank displays the account balance. <br>
+SPRINT Bank offers a bail-out service for accounts with a balance of zero. <br>
+SPRINT Bank has a Theme Shop that unlocks themes based on chance. <br>
+There are eleven themes to unlock. The cost to unlock a theme is <br>
+$500.00. <br>
+Themes from SPRINT Bank will update only the main menu page of <br>
+Code-sino. <br>
 
 
 
