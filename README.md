@@ -28,7 +28,7 @@ SPRINT Bank has a Theme Shop that unlocks themes based on chance. <br>
 There are eleven themes to unlock. The cost to unlock a theme is <br>
 $500.00. <br>
 Themes from SPRINT Bank will update only the main menu page of <br>
-Code-sino. <br>
+Code-sino. <br> <br> <br>
 
 
 
@@ -40,6 +40,6 @@ Code-sino. <br>
 * More uses with the global currency
 * Sound effects for the website
 * Punishment for bail-out usage
-* New Difficulty: Tax Mode
-    This mode will have a tax deduction after five rounds.
+* New Difficulty: Tax Mode <br>
+    This mode will have a tax deduction after five rounds. <br>
     Users can "Evade Tax", a (30% success change) to avoid tax.
