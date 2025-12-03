@@ -5,12 +5,41 @@
 ======= + ======= + ======= + ======= + ======= + =======  
 EECS 581 Group 21 Project 3: Code-sino  
   
-Welcome to the Code-sino!  
-This project will contain the following casino games that will be playable on your browser:  
+Welcome to the Code-sino!
+Code-sino is a website that features the following games: 
 * Baccarat
 * Blackjack 
 * Crash 
 * Picture Poker
 * Ride the Bus
 
-With each game, you can use the money gained to buy themes and customize your home page!
+The functionality of this project is entertainment.
+Code-sino contains a global currency that is shared among the five games
+and "SPRINT Bank".
+SPRINT Bank is an attached website to Code-sino.
+Code-sino works best on Google Chrome.
+
+------- + ------- + ------- + ------- + ------- + -------
+    SPRINT Bank "Make More of What's Yours"
+------- + ------- + ------- + ------- + ------- + -------
+SPRINT Bank displays the account balance
+SPRINT Bank offers a bail-out service for accounts with a balance of zero.
+SPRINT Bank has a Theme Shop that unlocks themes based on chance.
+There are eleven themes to unlock. The cost to unlock a theme is
+$500.00.
+Themes from SPRINT Bank will update only the main menu page of
+Code-sino.
+
+
+
+======= + ======= + ======= + ======= + ======= + ======= 
+    Code-sino Future Plans
+======= + ======= + ======= + ======= + ======= + ======= 
+* More games to play
+* Adding browser compatibility for FireFox
+* More uses with the global currency
+* Sound effects for the website
+* Punishment for bail-out usage
+* New Difficulty: Tax Mode
+    This mode will have a tax deduction after five rounds.
+    Users can "Evade Tax", a (30% success change) to avoid tax.
