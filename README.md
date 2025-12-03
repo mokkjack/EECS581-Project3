@@ -17,7 +17,7 @@ The functionality of this project is entertainment. <br>
 Code-sino contains a global currency that is shared among the five games <br>
 and "SPRINT Bank". <br>
 SPRINT Bank is an attached website to Code-sino. <br>
-Code-sino works best on Google Chrome. <br>
+Code-sino works best on Google Chrome. <br> <br>
 
 ------- + ------- + ------- + ------- + ------- + ------- <br>
     SPRINT Bank "Make More of What's Yours" <br>
