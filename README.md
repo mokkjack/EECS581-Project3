@@ -19,9 +19,9 @@ and "SPRINT Bank".
 SPRINT Bank is an attached website to Code-sino.
 Code-sino works best on Google Chrome.
 
-------- + ------- + ------- + ------- + ------- + -------
-    SPRINT Bank "Make More of What's Yours"
-------- + ------- + ------- + ------- + ------- + -------
+------- + ------- + ------- + ------- + ------- + ------- <br>
+    SPRINT Bank "Make More of What's Yours" <br>
+------- + ------- + ------- + ------- + ------- + ------- <br>
 SPRINT Bank displays the account balance
 SPRINT Bank offers a bail-out service for accounts with a balance of zero.
 SPRINT Bank has a Theme Shop that unlocks themes based on chance.
@@ -32,9 +32,9 @@ Code-sino.
 
 
 
-======= + ======= + ======= + ======= + ======= + ======= 
-    Code-sino Future Plans
-======= + ======= + ======= + ======= + ======= + ======= 
+======= + ======= + ======= + ======= + ======= + ======= <br>
+    Code-sino Future Plans <br>
+======= + ======= + ======= + ======= + ======= + ======= <br>
 * More games to play
 * Adding browser compatibility for FireFox
 * More uses with the global currency
